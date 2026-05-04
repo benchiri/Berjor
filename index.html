@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-  <title>Burjeon's Bakes | Artisan Bakery App</title>
-  <meta name="description" content="Burjeon's Bakes — premium artisan breads, pastries, custom cakes. Order via WhatsApp. Mobile-friendly bakery app.">
+  <title>Burjeon's Bakes | Artisan Bakery App - KES</title>
+  <meta name="description" content="Burjeon's Bakes — premium artisan breads, pastries, custom cakes in KES. Order via WhatsApp. Nairobi's finest bakery app.">
   <style>
     * {
       margin: 0;
@@ -335,7 +335,7 @@
       <!-- About + Why Us -->
       <div class="section-card">
         <div class="section-title">🔥 Heritage & Warmth</div>
-        <p style="margin-bottom: 20px;">Burjeon's Bakes blends old-world craftsmanship with modern elegance. Every loaf, pastry, and cake is made from scratch using premium grains, real butter, and organic inspiration. Located in Nairobi — we deliver fresh bakes daily.</p>
+        <p style="margin-bottom: 20px;">Burjeon's Bakes blends old-world craftsmanship with modern elegance. Every loaf, pastry, and cake is made from scratch using premium grains, real butter, and organic inspiration. Located in Nairobi — we deliver fresh bakes daily. <strong>All prices in Kenyan Shillings (KES)</strong></p>
         <div class="feature-list">
           <div class="feature-item">🍞 Sourdough master<br> since 2005</div>
           <div class="feature-item">✨ Gold standard<br>custom cakes</div>
@@ -352,19 +352,19 @@
           <textarea id="homeDetails" rows="2" placeholder="What would you like? (e.g., sourdough, birthday cake...)"></textarea>
           <button type="submit">📞 Send Order → Burjeon's Bakes</button>
         </form>
-        <div class="order-note-sm">We reply within 15 minutes</div>
+        <div class="order-note-sm">We reply within 15 minutes | Prices in KES</div>
       </div>
-      <footer>© 2026 Burjeon's Bakes — Fresh daily | Black & Gold</footer>
+      <footer>© 2026 Burjeon's Bakes — Fresh daily | Black & Gold | KES</footer>
     </div>
 
     <!-- ==================== PRODUCTS PAGE (full catalog, all bakery items) ==================== -->
     <div id="productsPage" class="app-page">
       <div style="padding: 20px 0 10px 0;">
         <h2 style="color:#e6b422; text-align:center; margin: 12px 0 8px;">🥐 Our Full Bakery 🥖</h2>
-        <p style="text-align:center; margin-bottom: 20px; color:#bcb09b;">Artisan breads · Pastries · Cakes · Savories</p>
+        <p style="text-align:center; margin-bottom: 20px; color:#bcb09b;">Artisan breads · Pastries · Cakes · Savories | <strong>All prices in KES</strong></p>
       </div>
       <div id="productCatalog" class="product-grid">
-        <!-- dynamic products injected via JS but we fill with core items -->
+        <!-- dynamic products injected via JS -->
       </div>
       
       <!-- order form on product page too -->
@@ -377,32 +377,36 @@
           <button type="submit">🍞 Order via WhatsApp</button>
         </form>
       </div>
-      <footer>Tap any product below to pre-fill order 💛</footer>
+      <footer>Tap any product below to pre-fill order 💛 | KES currency</footer>
     </div>
   </div>
 </div>
 
 <script>
-  // ---------- FULL BAKERY PRODUCT DATABASE (breads, pastries, cakes, savory, sweets) ----------
+  // ---------- FULL BAKERY PRODUCT DATABASE - ALL PRICES IN KENYAN SHILLINGS (KES) ----------
+  // Conversion approximate: $1 USD ≈ 130 KES for realistic local pricing
   const bakeryProducts = [
-    { id: 1, name: "Artisan Sourdough", category: "bread", desc: "Slow-fermented, crusty exterior, chewy crumb.", price: "$7.50", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "Sourdough" },
-    { id: 2, name: "Classic Baguette", category: "bread", desc: "Crisp golden crust, airy interior.", price: "$3.90", img: "https://images.unsplash.com/photo-1585478259715-7b5c5e3c4f6b?w=500&q=80", badge: "French staple" },
-    { id: 3, name: "Seeded Multigrain", category: "bread", desc: "Flax, sunflower, pumpkin seeds. High fiber.", price: "$5.50", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "Healthy" },
-    { id: 4, name: "Butter Croissant", category: "pastry", desc: "64 layers, flaky & golden.", price: "$4.25", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80", badge: "Viennoiserie" },
-    { id: 5, name: "Pain au Chocolat", category: "pastry", desc: "Dark chocolate batons in buttery dough.", price: "$4.50", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80", badge: "Chocolate" },
-    { id: 6, name: "Cinnamon Swirl", category: "pastry", desc: "Cream cheese glaze & brown sugar.", price: "$5.25", img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=500&q=80", badge: "Pastry" },
-    { id: 7, name: "Birthday Grand Cake", category: "cake", desc: "Customizable layers, buttercream/ganache.", price: "from $35", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&q=80", badge: "Celebration" },
+    { id: 1, name: "Artisan Sourdough", category: "bread", desc: "Slow-fermented, crusty exterior, chewy crumb.", price: "950 KES", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "Sourdough" },
+    { id: 2, name: "Classic Baguette", category: "bread", desc: "Crisp golden crust, airy interior.", price: "490 KES", img: "https://images.unsplash.com/photo-1585478259715-7b5c5e3c4f6b?w=500&q=80", badge: "French staple" },
+    { id: 3, name: "Seeded Multigrain", category: "bread", desc: "Flax, sunflower, pumpkin seeds. High fiber.", price: "720 KES", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "Healthy" },
+    { id: 4, name: "Butter Croissant", category: "pastry", desc: "64 layers, flaky & golden.", price: "550 KES", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80", badge: "Viennoiserie" },
+    { id: 5, name: "Pain au Chocolat", category: "pastry", desc: "Dark chocolate batons in buttery dough.", price: "590 KES", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80", badge: "Chocolate" },
+    { id: 6, name: "Cinnamon Swirl", category: "pastry", desc: "Cream cheese glaze & brown sugar.", price: "680 KES", img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=500&q=80", badge: "Pastry" },
+    { id: 7, name: "Birthday Grand Cake", category: "cake", desc: "Customizable layers, buttercream/ganache.", price: "from 4,500 KES", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&q=80", badge: "Celebration" },
     { id: 8, name: "Signature Tiered Cake", category: "cake", desc: "Wedding / anniversary, any flavor.", price: "Inquire", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&q=80", badge: "Custom" },
-    { id: 9, name: "Bespoke Birthday Cake", category: "cake", desc: "Personalized toppers & filling choices.", price: "from $42", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&q=80", badge: "Buttercream" },
-    { id: 10, name: "Spinach & Feta Quiche", category: "savory", desc: "Buttery crust, perfect for brunch.", price: "$8.25", img: "https://images.unsplash.com/photo-1571126891846-1d46ad0e4cb2?w=500&q=80", badge: "Savory bake" },
-    { id: 11, name: "Seasonal Fruit Tart", category: "sweet", desc: "Vanilla custard, glazed berries.", price: "$6.90", img: "https://images.unsplash.com/photo-1603532648955-039310d9a75b?w=500&q=80", badge: "Patisserie" },
-    { id: 12, name: "Brown Butter Cookies", category: "sweet", desc: "Chunky dark chocolate, sea salt.", price: "$12/dozen", img: "https://images.unsplash.com/photo-1574085733277-851c9d3f3c3e?w=500&q=80", badge: "Cookie box" },
-    { id: 13, name: "Raspberry Danish", category: "pastry", desc: "Tangy fruit & vanilla drizzle.", price: "$4.80", img: "https://images.unsplash.com/photo-1611320955216-9d6ac8a1f023?w=500&q=80", badge: "Viennoiserie" },
-    { id: 14, name: "Brioche à Tête", category: "bread", desc: "Rich, eggy, soft-crumb delight.", price: "$6.50", img: "https://images.unsplash.com/photo-1623334044303-2410211483f3?w=500&q=80", badge: "Sweet bread" },
-    { id: 15, name: "French Macarons", category: "sweet", desc: "Pistachio, rose, chocolate flavors.", price: "$18/box", img: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=500&q=80", badge: "Premium" }
+    { id: 9, name: "Bespoke Birthday Cake", category: "cake", desc: "Personalized toppers & filling choices.", price: "from 5,500 KES", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&q=80", badge: "Buttercream" },
+    { id: 10, name: "Spinach & Feta Quiche", category: "savory", desc: "Buttery crust, perfect for brunch.", price: "1,050 KES", img: "https://images.unsplash.com/photo-1571126891846-1d46ad0e4cb2?w=500&q=80", badge: "Savory bake" },
+    { id: 11, name: "Seasonal Fruit Tart", category: "sweet", desc: "Vanilla custard, glazed berries.", price: "890 KES", img: "https://images.unsplash.com/photo-1603532648955-039310d9a75b?w=500&q=80", badge: "Patisserie" },
+    { id: 12, name: "Brown Butter Cookies", category: "sweet", desc: "Chunky dark chocolate, sea salt.", price: "1,550 KES/dozen", img: "https://images.unsplash.com/photo-1574085733277-851c9d3f3c3e?w=500&q=80", badge: "Cookie box" },
+    { id: 13, name: "Raspberry Danish", category: "pastry", desc: "Tangy fruit & vanilla drizzle.", price: "620 KES", img: "https://images.unsplash.com/photo-1611320955216-9d6ac8a1f023?w=500&q=80", badge: "Viennoiserie" },
+    { id: 14, name: "Brioche à Tête", category: "bread", desc: "Rich, eggy, soft-crumb delight.", price: "840 KES", img: "https://images.unsplash.com/photo-1623334044303-2410211483f3?w=500&q=80", badge: "Sweet bread" },
+    { id: 15, name: "French Macarons", category: "sweet", desc: "Pistachio, rose, chocolate flavors.", price: "2,300 KES/box", img: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=500&q=80", badge: "Premium" },
+    { id: 16, name: "Ciabatta Loaf", category: "bread", desc: "Italian rustic bread, open crumb.", price: "680 KES", img: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=500&q=80", badge: "Artisan" },
+    { id: 17, name: "Almond Croissant", category: "pastry", desc: "Filled with almond cream & sliced almonds.", price: "720 KES", img: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=500&q=80", badge: "Viennoiserie" },
+    { id: 18, name: "Red Velvet Cake (6 inch)", category: "cake", desc: "Cream cheese frosting, velvety crumb.", price: "3,200 KES", img: "https://images.unsplash.com/photo-1586788224331-947f68671cf1?w=500&q=80", badge: "Signature" }
   ];
 
-  // render product grid
+  // render product grid with KES formatting
   function renderProducts(filterCategory = null) {
     const container = document.getElementById('productCatalog');
     if (!container) return;
@@ -432,15 +436,13 @@
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const productName = btn.getAttribute('data-pname');
-        // prefill product order form (on products page)
         const prodDetailsField = document.getElementById('prodDetails');
         if (prodDetailsField) {
-          prodDetailsField.value = `I'd like to order: ${productName} (from catalog). Please assist.`;
+          prodDetailsField.value = `I'd like to order: ${productName} (from catalog). Please assist with KES pricing.`;
           document.getElementById('prodName')?.focus();
           alert(`✨ "${productName}" added to order box! Fill name & phone, then send.`);
         } else {
-          // fallback whatsapp
-          sendWhatsAppDirect("Burjeon's Bakes Customer", "0712345678", `Interested in ${productName}`);
+          sendWhatsAppDirect("Burjeon's Bakes Customer", "0712345678", `Interested in ${productName} (KES)`);
         }
       });
     });
@@ -458,20 +460,18 @@
       productsPage.classList.remove('active-page');
       homeBtn.classList.add('active');
       prodBtn.classList.remove('active');
-      // scroll top
       document.querySelector('.pages-area').scrollTop = 0;
     } else {
       homePage.classList.remove('active-page');
       productsPage.classList.add('active-page');
       prodBtn.classList.add('active');
       homeBtn.classList.remove('active');
-      // re-render full products if needed
       renderProducts(null);
       document.querySelector('.pages-area').scrollTop = 0;
     }
   }
 
-  // WhatsApp sender utility
+  // WhatsApp sender utility with KES reference
   function sendWhatsAppOrder(name, phone, details, event) {
     if (event) event.preventDefault();
     if (!name || !phone) {
@@ -483,22 +483,21 @@
       alert("📞 Please enter a valid phone number.");
       return false;
     }
-    const bakeryNumber = "254700000000"; // demo number, replace with actual
-    const msg = `🫓 *BURJEON'S BAKES ORDER* 🫓\n\n👤 Customer: ${name}\n📞 Contact: ${phone}\n🍞 Order: ${details || "Bakery order"}\n\nThank you! 🙌`;
+    const bakeryNumber = "254700000000"; // demo number, replace with actual Burjeon's Bakes WhatsApp
+    const msg = `🫓 *BURJEON'S BAKES ORDER* 🫓\n\n👤 Customer: ${name}\n📞 Contact: ${phone}\n🍞 Order: ${details || "Bakery order"}\n💵 Currency: Kenyan Shillings (KES)\n\nThank you for choosing Burjeon's! 🙌`;
     const url = `https://wa.me/${bakeryNumber}?text=${encodeURIComponent(msg)}`;
-    const confirmSend = confirm(`📱 Send order to Burjeon's Bakes via WhatsApp?`);
+    const confirmSend = confirm(`📱 Send order to Burjeon's Bakes via WhatsApp? (Prices in KES)`);
     if (confirmSend) {
       window.open(url, '_blank');
-      alert("✅ Order request sent! We'll reply shortly.");
+      alert("✅ Order request sent! We'll reply shortly with KES total.");
       return true;
     }
     return false;
   }
 
-  // direct fallback (quick order)
   function sendWhatsAppDirect(name, phone, details) {
     const bakeryNumber = "254700000000";
-    const msg = `🫓 *BURJEON'S BAKES* - Quick inquiry\n👤 ${name}\n📞 ${phone}\n📦 ${details}`;
+    const msg = `🫓 *BURJEON'S BAKES* - Quick inquiry (KES)\n👤 ${name}\n📞 ${phone}\n📦 ${details}`;
     window.open(`https://wa.me/${bakeryNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
@@ -507,7 +506,7 @@
     e.preventDefault();
     const name = document.getElementById('homeName').value.trim();
     const phone = document.getElementById('homePhone').value.trim();
-    const details = document.getElementById('homeDetails').value.trim() || "Bakery order from home";
+    const details = document.getElementById('homeDetails').value.trim() || "Bakery order from home (KES)";
     sendWhatsAppOrder(name, phone, details, e);
   });
 
@@ -515,7 +514,7 @@
     e.preventDefault();
     const name = document.getElementById('prodName').value.trim();
     const phone = document.getElementById('prodPhone').value.trim();
-    const details = document.getElementById('prodDetails').value.trim() || "Product catalog order";
+    const details = document.getElementById('prodDetails').value.trim() || "Product catalog order (KES)";
     sendWhatsAppOrder(name, phone, details, e);
   });
 
@@ -539,7 +538,6 @@
         switchToPage('products');
         setTimeout(() => {
           renderProducts(cat);
-          // scroll slight
           document.querySelector('.pages-area').scrollTop = 0;
           const banner = document.querySelector('#productsPage h2');
           if(banner) banner.scrollIntoView({behavior:'smooth', block:'start'});
@@ -550,10 +548,8 @@
 
   // initial load home page, preload products content
   renderProducts(null);
-  // set active nav highlight
   document.getElementById('homeNavBtn')?.classList.add('active');
   window.addEventListener('load', () => {
-    // fix any double rendering
     document.querySelector('.pages-area').scrollTop = 0;
   });
 </script>
