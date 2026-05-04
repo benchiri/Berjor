@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Berjoen Bakery | Golden Crust & Artisan Breads</title>
-  <meta name="description" content="Berjoen Bakery — premium artisan breads, pastries, cakes, and custom bakes. Order online via WhatsApp.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Burjeon's Bakes | Artisan Bakery App</title>
+  <meta name="description" content="Burjeon's Bakes — premium artisan breads, pastries, custom cakes. Order via WhatsApp. Mobile-friendly bakery app.">
   <style>
     * {
       margin: 0;
@@ -16,621 +16,546 @@
       background: #0a0a0a;
       color: #e0e0e0;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      scroll-behavior: smooth;
-      line-height: 1.5;
-    }
-
-    /* scroll padding for fixed header */
-    html {
-      scroll-padding-top: 90px;
-      scroll-behavior: smooth;
-    }
-
-    /* ----- HEADER (dark + gold) ----- */
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      background: #0f0f0f;
-      backdrop-filter: blur(8px);
-      background-color: rgba(10, 10, 10, 0.95);
+      overflow-x: hidden;
+      height: 100vh;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 40px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-      z-index: 1000;
-      border-bottom: 1px solid #b88b2c30;
-      flex-wrap: wrap;
+      flex-direction: column;
     }
 
-    header h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
+    /* App-like container */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Header (App Bar) */
+    .app-header {
+      background: #0f0f0f;
+      padding: 18px 24px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid #e6b42230;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+    .app-header h1 {
+      font-size: 1.7rem;
       background: linear-gradient(135deg, #e6b422, #c98f2c);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
     }
-
-    .nav-links {
+    .header-actions {
       display: flex;
-      gap: 2rem;
-      align-items: center;
+      gap: 20px;
     }
-
-    header a {
-      text-decoration: none;
-      color: #cfcfcf;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: 0.2s ease;
-      letter-spacing: 0.3px;
-    }
-
-    header a:hover {
+    .nav-icon {
+      background: none;
+      border: none;
       color: #e6b422;
-      text-shadow: 0 0 4px rgba(230, 180, 34, 0.4);
-    }
-
-    /* page indicator dots / active state */
-    .page-btn {
-      background: #2a241a;
-      border: 1px solid #b88b2c;
-      color: #e6b422;
-      padding: 6px 16px;
-      border-radius: 60px;
+      font-size: 1.3rem;
       font-weight: 600;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 40px;
       transition: 0.2s;
     }
-    .page-btn.active {
+    .nav-icon.active {
       background: #e6b422;
       color: #0a0a0a;
-      border-color: #e6b422;
     }
-    .page-switch {
-      display: flex;
-      gap: 12px;
-      margin-left: 20px;
+    .nav-icon:hover {
+      background: #e6b42220;
     }
 
-    /* ----- main pages container (two-page layout) ----- */
-    .pages-container {
+    /* Main scrollable pages area */
+    .pages-area {
+      flex: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
       position: relative;
-      width: 100%;
-      overflow-x: hidden;
     }
 
-    .page {
-      transition: transform 0.4s ease-in-out, opacity 0.3s;
-      width: 100%;
-      will-change: transform;
-    }
-
-    .page.hidden-page {
+    /* Page styling (like app screens) */
+    .app-page {
       display: none;
+      animation: fadeSlide 0.25s ease-out;
+      padding-bottom: 30px;
+    }
+    .app-page.active-page {
+      display: block;
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateX(8px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
 
-    /* ----- HERO section (page 1) Gold/brown over black ----- */
-    .hero {
-      height: 90vh;
-      min-height: 560px;
-      background: linear-gradient(115deg, rgba(0,0,0,0.75) 0%, rgba(30,20,10,0.7) 100%), url('https://images.unsplash.com/photo-1519869325930-281384150729?w=1600&q=80') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* ========== HOME PAGE (all info + navigation to products) ========== */
+    .hero-app {
+      background: linear-gradient(115deg, rgba(0,0,0,0.8) 0%, rgba(30,20,10,0.75) 100%), url('https://images.unsplash.com/photo-1519869325930-281384150729?w=1200&q=80') center/cover no-repeat;
+      margin: 20px 20px 24px 20px;
+      border-radius: 32px;
+      padding: 50px 20px;
       text-align: center;
-      margin-top: 70px;
-      border-radius: 0 0 32px 32px;
     }
-
-    .hero-content {
-      max-width: 800px;
-      padding: 0 20px;
-    }
-
-    .hero h2 {
-      font-size: 3.5rem;
-      font-weight: 800;
+    .hero-app h2 {
+      font-size: 2.5rem;
       background: linear-gradient(135deg, #e6b422, #c17f2e);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
     }
-
-    .hero p {
-      font-size: 1.25rem;
+    .hero-app p {
       color: #d4cdb2;
-      margin-bottom: 2rem;
+      margin: 16px 0;
     }
-
-    .btn-gold {
-      background: #b87c2e;
-      background: linear-gradient(105deg, #c68524, #a5661a);
-      padding: 14px 34px;
-      color: #0f0f0f;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 800;
-      display: inline-block;
-      transition: 0.2s;
-      box-shadow: 0 8px 18px rgba(184, 139, 44, 0.3);
-      border: none;
-      font-size: 1rem;
-    }
-
-    .btn-gold:hover {
-      transform: translateY(-3px);
-      background: #daa42b;
-      box-shadow: 0 12px 26px rgba(230, 180, 52, 0.4);
-      color: #0a0a0a;
-    }
-
-    /* section styling */
-    .section {
-      padding: 70px 24px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .section h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #e6b422;
-      margin-bottom: 48px;
-      position: relative;
-    }
-    .section h2:after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: #e6b422;
-      margin: 16px auto 0;
-      border-radius: 4px;
-    }
-
-    /* product grid — bakery items: breads, pastries, etc */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-    }
-
-    .card {
-      background: #171412;
-      border-radius: 28px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      border: 1px solid #3e3328;
-      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.6);
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: #c98f2c;
-      box-shadow: 0 20px 30px -12px rgba(230, 180, 34, 0.2);
-    }
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      transition: 0.3s;
-    }
-    .card:hover img {
-      transform: scale(1.02);
-    }
-    .card-content {
-      padding: 20px 18px;
-    }
-    .card-content h3 {
-      font-size: 1.5rem;
-      color: #e6b422;
-      margin-bottom: 8px;
-    }
-    .card-content p {
-      color: #bcb09b;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-    }
-    .price {
-      font-weight: 800;
-      color: #e6b422;
-      letter-spacing: 0.5px;
-      font-size: 1.2rem;
-    }
-
-    /* about section (brown/grey background) */
-    .about {
-      background: #1e1b17;
-      padding: 48px 40px;
-      border-radius: 44px;
-      text-align: center;
-      border-left: 4px solid #e6b422;
-      border-right: 4px solid #e6b42220;
-    }
-    .about p {
-      font-size: 1.2rem;
-      color: #d6cfbc;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    /* order form */
-    .order-form-container {
+    .section-card {
       background: #14110e;
-      padding: 36px 32px;
-      border-radius: 40px;
-      border: 1px solid #4a3b2c;
-      max-width: 700px;
-      margin: 0 auto;
+      border-radius: 32px;
+      margin: 0 20px 28px 20px;
+      padding: 28px 24px;
+      border: 1px solid #3a2e22;
     }
-    input, textarea {
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0 4px;
-      border: 1px solid #4a3b2c;
-      border-radius: 28px;
-      font-size: 1rem;
-      background: #221f1b;
-      color: #ece2d4;
-      font-family: inherit;
-      transition: 0.2s;
+    .section-title {
+      color: #e6b422;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #e6b422;
-      box-shadow: 0 0 0 2px #e6b42240;
-      background: #2b241e;
+    .grid-home {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 18px;
+      margin-top: 8px;
     }
-    button {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(95deg, #c38225, #a05e16);
-      border: none;
-      border-radius: 40px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #0e0e0e;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-top: 18px;
-    }
-    button:hover {
-      background: #da9f2c;
-      transform: scale(0.98);
-    }
-    .order-note {
+    .home-category {
+      background: #1f1b17;
+      border-radius: 24px;
+      padding: 16px 8px;
       text-align: center;
+      transition: 0.2s;
+      border: 1px solid #4a3826;
+      cursor: pointer;
+    }
+    .home-category:hover {
+      transform: translateY(-4px);
+      border-color: #e6b422;
+    }
+    .home-category span {
+      font-size: 2rem;
+      display: block;
+    }
+    .home-category p {
+      font-weight: 600;
+      margin-top: 8px;
+      color: #e6b422;
+    }
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: space-between;
+    }
+    .feature-item {
+      flex: 1;
+      background: #1e1b17;
+      border-radius: 24px;
+      padding: 18px;
+      text-align: center;
+    }
+    .btn-large {
+      background: linear-gradient(105deg, #c68524, #a5661a);
+      padding: 14px 24px;
+      border-radius: 60px;
+      font-weight: 800;
+      text-align: center;
+      color: #0f0f0f;
+      display: block;
+      margin-top: 16px;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      font-size: 1rem;
+    }
+    .order-note-sm {
       font-size: 0.7rem;
-      margin-top: 14px;
+      margin-top: 12px;
       color: #aa9f8a;
     }
 
-    footer {
-      text-align: center;
-      padding: 32px 20px;
-      background: #060504;
-      border-top: 1px solid #3a2e22;
-      color: #b9ae96;
-      font-size: 0.85rem;
-    }
-
-    /* second page (menu / all bakery items) */
-    .bakery-menu-grid {
+    /* product grid (full catalog) */
+    .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 30px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 0 20px;
+      margin-top: 10px;
     }
-    .menu-card {
+    .product-card {
       background: #171412;
       border-radius: 28px;
-      padding: 0;
       overflow: hidden;
-      border: 1px solid #4a3826;
+      border: 1px solid #3e3328;
       transition: 0.2s;
     }
-    .menu-card img {
+    .product-card img {
       width: 100%;
       height: 190px;
       object-fit: cover;
     }
-    .menu-info {
+    .product-info {
       padding: 18px;
     }
-    .menu-info h4 {
-      font-size: 1.3rem;
+    .product-info h3 {
       color: #e6b422;
+      font-size: 1.3rem;
     }
-    .badge {
+    .badge-prod {
       background: #2f2a22;
       display: inline-block;
       padding: 4px 12px;
       border-radius: 24px;
       font-size: 0.7rem;
       color: #e6b422;
-      margin: 10px 0 8px;
+      margin: 8px 0;
+    }
+    .price-gold {
+      font-weight: 800;
+      color: #e6b422;
+      font-size: 1.2rem;
+    }
+    .order-btn-mini {
+      background: #c68524;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: bold;
+      margin-top: 12px;
+      width: 100%;
+      color: #0a0a0a;
+      cursor: pointer;
     }
 
-    @media (max-width: 760px) {
-      header {
-        padding: 12px 24px;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .hero h2 {
-        font-size: 2.2rem;
-      }
-      .section h2 {
-        font-size: 2rem;
-      }
-      .page-switch {
-        margin-top: 6px;
-      }
+    /* order form card */
+    .form-card {
+      background: #14110e;
+      border-radius: 32px;
+      margin: 20px;
+      padding: 28px;
+      border: 1px solid #4a3b2c;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0 12px;
+      border: 1px solid #4a3b2c;
+      border-radius: 60px;
+      background: #221f1b;
+      color: #ece2d4;
+    }
+    textarea {
+      border-radius: 28px;
+      resize: vertical;
+    }
+    button[type="submit"] {
+      background: linear-gradient(95deg, #c38225, #a05e16);
+      border: none;
+      border-radius: 60px;
+      padding: 14px;
+      font-weight: 800;
+      color: #0a0a0a;
+      width: 100%;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.7rem;
+      border-top: 1px solid #2a241a;
+      margin-top: 10px;
+    }
+    @media (max-width: 600px) {
+      .hero-app h2 { font-size: 1.8rem; }
+      .section-title { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>🥖 BERJOEN BAKERY</h1>
-  <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
-    <div class="nav-links">
-      <a href="#" onclick="switchPage(1); return false;">Home</a>
-      <a href="#" onclick="switchPage(2); return false;">Full Bakery</a>
-      <a href="#" onclick="switchPage(1); document.getElementById('order-section-home').scrollIntoView({behavior:'smooth'}); return false;">Order</a>
-    </div>
-    <div class="page-switch">
-      <button class="page-btn active" id="btnPage1" onclick="switchPage(1)">🍞 Page 1</button>
-      <button class="page-btn" id="btnPage2" onclick="switchPage(2)">🥐 Page 2</button>
+<div class="app-container">
+  <div class="app-header">
+    <h1>🥐 BURJEON'S BAKES</h1>
+    <div class="header-actions">
+      <button class="nav-icon" id="homeNavBtn" data-page="home">🏠 Home</button>
+      <button class="nav-icon" id="productsNavBtn" data-page="products">🥨 Products</button>
     </div>
   </div>
-</header>
 
-<div class="pages-container">
-  <!-- ================= PAGE 1 - HOME & ORDER & CAKES + BAKERY HIGHLIGHTS ================= -->
-  <div id="page1" class="page">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-content">
+  <div class="pages-area">
+    <!-- ==================== HOME PAGE (all info + navigation to products) ==================== -->
+    <div id="homePage" class="app-page active-page">
+      <!-- Hero banner -->
+      <div class="hero-app">
         <h2>Golden Crust · Artisan Soul</h2>
-        <p>Hand-shaped sourdough • flaky pastries • custom celebration cakes</p>
-        <a href="#order-section-home" class="btn-gold">✨ Order Fresh Bakes</a>
+        <p>Sourdough • Pastries • Cakes • Savory Bakes</p>
+        <button class="btn-large" id="exploreProductsBtn" style="display: inline-block; width: auto; margin-top: 24px;">✨ Explore Full Menu →</button>
       </div>
-    </section>
 
-    <!-- bakery specialties (what you find in a bakery) breads, croissants, etc -->
-    <section class="section">
-      <h2>From Our Oven</h2>
-      <div class="grid">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Artisan sourdough">
-          <div class="card-content">
-            <h3>🧺 Rustic Sourdough</h3>
-            <p>Slow-fermented, crackling crust, deep flavor.</p>
-            <span class="price">from $7.50</span>
+      <!-- All Bakery Categories (press to go to product section) -->
+      <div class="section-card">
+        <div class="section-title">🍞 What's Baking?</div>
+        <div class="grid-home">
+          <div class="home-category" data-category="bread">
+            <span>🥖</span><p>Artisan Breads</p>
+          </div>
+          <div class="home-category" data-category="pastry">
+            <span>🥐</span><p>Viennoiserie</p>
+          </div>
+          <div class="home-category" data-category="cake">
+            <span>🎂</span><p>Celebration Cakes</p>
+          </div>
+          <div class="home-category" data-category="savory">
+            <span>🧀</span><p>Savory Bakes</p>
+          </div>
+          <div class="home-category" data-category="sweet">
+            <span>🍪</span><p>Cookies & Tarts</p>
           </div>
         </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Chocolate croissant">
-          <div class="card-content">
-            <h3>🥐 Butter Croissant</h3>
-            <p>Flaky, golden, 64 layers of pure bliss.</p>
-            <span class="price">$4.25</span>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&q=80" alt="Cinnamon rolls">
-          <div class="card-content">
-            <h3>🍥 Cinnamon Swirl</h3>
-            <p>Soft dough, cream cheese glaze & brown sugar.</p>
-            <span class="price">$4.90</span>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=600&q=80" alt="Birthday cake">
-          <div class="card-content">
-            <h3>🎂 Birthday Grand</h3>
-            <p>Customized layers, buttercream & ganache.</p>
-            <span class="price">from $35</span>
-          </div>
+        <p style="font-size: 0.8rem; margin-top: 20px; text-align: center; color: #bcb09b;">👉 Tap any category to see products instantly</p>
+      </div>
+
+      <!-- About + Why Us -->
+      <div class="section-card">
+        <div class="section-title">🔥 Heritage & Warmth</div>
+        <p style="margin-bottom: 20px;">Burjeon's Bakes blends old-world craftsmanship with modern elegance. Every loaf, pastry, and cake is made from scratch using premium grains, real butter, and organic inspiration. Located in Nairobi — we deliver fresh bakes daily.</p>
+        <div class="feature-list">
+          <div class="feature-item">🍞 Sourdough master<br> since 2005</div>
+          <div class="feature-item">✨ Gold standard<br>custom cakes</div>
+          <div class="feature-item">📦 Nationwide<br>shipping</div>
         </div>
       </div>
-    </section>
 
-    <!-- about bakery (brown/grey theme) -->
-    <section class="section">
-      <div class="about">
-        <h2 style="color:#e6b422;">Heritage & Warmth</h2>
-        <p>🔥 Berjoen Bakery blends old-world craftsmanship with modern elegance. Every loaf, pastry, and cake is made from scratch using premium grains, real butter, and organic inspiration. Whether it's a rustic baguette or a tiered wedding cake, we bake memories.</p>
+      <!-- Quick Order Section on Home -->
+      <div class="form-card">
+        <h3 style="color:#e6b422; margin-bottom: 12px;">📦 Quick Order (WhatsApp)</h3>
+        <form id="homeOrderForm">
+          <input type="text" id="homeName" placeholder="Your name" required>
+          <input type="tel" id="homePhone" placeholder="Phone number" required>
+          <textarea id="homeDetails" rows="2" placeholder="What would you like? (e.g., sourdough, birthday cake...)"></textarea>
+          <button type="submit">📞 Send Order → Burjeon's Bakes</button>
+        </form>
+        <div class="order-note-sm">We reply within 15 minutes</div>
       </div>
-    </section>
+      <footer>© 2026 Burjeon's Bakes — Fresh daily | Black & Gold</footer>
+    </div>
 
-    <!-- full order section (WhatsApp) -->
-    <section class="section" id="order-section-home">
-      <h2>Place Your Bakery Order</h2>
-      <div class="order-form-container">
-        <form id="whatsappOrderForm">
-          <input type="text" id="custName" placeholder="Your name" required>
-          <input type="tel" id="custPhone" placeholder="WhatsApp / phone number" required>
-          <textarea id="orderDetails" rows="3" placeholder="Describe your order: bread type, cake design, pastries quantity, preferred pickup date..."></textarea>
-          <button type="submit" id="sendOrderBtn">📞 Send via WhatsApp → Berjoen Bakery</button>
-          <div class="order-note">We reply within 15 min — confirm your custom cake or fresh bread order ✨</div>
+    <!-- ==================== PRODUCTS PAGE (full catalog, all bakery items) ==================== -->
+    <div id="productsPage" class="app-page">
+      <div style="padding: 20px 0 10px 0;">
+        <h2 style="color:#e6b422; text-align:center; margin: 12px 0 8px;">🥐 Our Full Bakery 🥖</h2>
+        <p style="text-align:center; margin-bottom: 20px; color:#bcb09b;">Artisan breads · Pastries · Cakes · Savories</p>
+      </div>
+      <div id="productCatalog" class="product-grid">
+        <!-- dynamic products injected via JS but we fill with core items -->
+      </div>
+      
+      <!-- order form on product page too -->
+      <div class="form-card" style="margin-top: 20px;">
+        <h3 style="color:#e6b422;">🛒 Request any item from catalog</h3>
+        <form id="productOrderForm">
+          <input type="text" id="prodName" placeholder="Full name" required>
+          <input type="tel" id="prodPhone" placeholder="WhatsApp number" required>
+          <textarea id="prodDetails" rows="2" placeholder="Which products? (e.g., baguette + chocolate croissant + birthday cake)"></textarea>
+          <button type="submit">🍞 Order via WhatsApp</button>
         </form>
       </div>
-    </section>
-  </div>
-
-  <!-- ================= PAGE 2 - FULL BAKERY CATALOG (breads, pastries, cakes, savories) ================= -->
-  <div id="page2" class="page hidden-page">
-    <section class="section" style="margin-top: 30px;">
-      <h2>🥨 The Complete Bakery 🥖</h2>
-      <p style="text-align: center; margin-bottom: 40px; color: #cfc6b2;">Sourdough · Viennoiserie · Tarts · Cookies · Celebration Cakes</p>
-      <div class="bakery-menu-grid">
-        <!-- breads -->
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1585478259715-7b5c5e3c4f6b?w=600&q=80" alt="Baguette">
-          <div class="menu-info"><h4>🇫🇷 Classic Baguette</h4><div class="badge">Artisan bread</div><p>Crispy crust, airy crumb — daily baked.</p><span class="price">$3.90</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Multigrain">
-          <div class="menu-info"><h4>🌾 Seeded Multigrain</h4><div class="badge">High fiber</div><p>Flax, sunflower & pumpkin seeds.</p><span class="price">$5.50</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Pain au chocolat">
-          <div class="menu-info"><h4>🍫 Pain au Chocolat</h4><div class="badge">Viennoiserie</div><p>Dark chocolate batons in buttery layers.</p><span class="price">$4.50</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&q=80" alt="Cinnamon buns">
-          <div class="menu-info"><h4>✨ Sticky Cinnamon Buns</h4><div class="badge">Pastry</div><p>Pecan + cream cheese frosting.</p><span class="price">$5.25</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80" alt="Wedding tier cake">
-          <div class="menu-info"><h4>🎂 Signature Tiered Cake</h4><div class="badge">Custom</div><p>Wedding / anniversary, any flavor.</p><span class="price">Inquire</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=600&q=80" alt="Birthday cake design">
-          <div class="menu-info"><h4>🎈 Bespoke Birthday Cake</h4><div class="badge">Buttercream</div><p>Personalized toppers & filling choices.</p><span class="price">from $42</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1603532648955-039310d9a75b?w=600&q=80" alt="Fruit tart">
-          <div class="menu-info"><h4>🍓 Seasonal Fruit Tart</h4><div class="badge">Patisserie</div><p>Vanilla custard, glazed berries.</p><span class="price">$6.90</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1574085733277-851c9d3f3c3e?w=600&q=80" alt="Chocolate chip cookies">
-          <div class="menu-info"><h4>🍪 Brown Butter Cookies</h4><div class="badge">Cookie box</div><p>Chunky dark chocolate, sea salt.</p><span class="price">$12/dozen</span></div>
-        </div>
-        <div class="menu-card">
-          <img src="https://images.unsplash.com/photo-1571126891846-1d46ad0e4cb2?w=600&q=80" alt="Savory quiche">
-          <div class="menu-info"><h4>🧀 Spinach & Feta Quiche</h4><div class="badge">Savory bake</div><p>Perfect for brunch, buttery crust.</p><span class="price">$8.25</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- small order prompt on page 2 also but consistent -->
-    <section class="section">
-      <div class="order-form-container">
-        <h3 style="color:#e6b422; text-align:center; margin-bottom: 24px;">📦 Request any item from our Bakery</h3>
-        <form id="whatsappOrderFormPage2">
-          <input type="text" id="custName2" placeholder="Full name" required>
-          <input type="tel" id="custPhone2" placeholder="Your phone number" required>
-          <textarea id="orderDetails2" rows="3" placeholder="Which bakery items? e.g. 2 sourdough loaves, 1 birthday cake (chocolate), 6 croissants..."></textarea>
-          <button type="submit" class="btn-gold" style="background: #c68524; color: #0a0a0a;">🍞 Order via WhatsApp</button>
-        </form>
-      </div>
-    </section>
+      <footer>Tap any product below to pre-fill order 💛</footer>
+    </div>
   </div>
 </div>
 
-<footer>
-  <p>© 2026 Berjoen Bakery — Warmth, flour & gold | Black & Gold Edition</p>
-  <p style="margin-top: 0.5rem;">📍 Nairobi | Fresh baked daily — order by 4pm for next day delivery</p>
-</footer>
-
 <script>
-  // Two-page navigation with black/gold theme persistence
-  function switchPage(pageNumber) {
-    const page1 = document.getElementById('page1');
-    const page2 = document.getElementById('page2');
-    const btn1 = document.getElementById('btnPage1');
-    const btn2 = document.getElementById('btnPage2');
+  // ---------- FULL BAKERY PRODUCT DATABASE (breads, pastries, cakes, savory, sweets) ----------
+  const bakeryProducts = [
+    { id: 1, name: "Artisan Sourdough", category: "bread", desc: "Slow-fermented, crusty exterior, chewy crumb.", price: "$7.50", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "Sourdough" },
+    { id: 2, name: "Classic Baguette", category: "bread", desc: "Crisp golden crust, airy interior.", price: "$3.90", img: "https://images.unsplash.com/photo-1585478259715-7b5c5e3c4f6b?w=500&q=80", badge: "French staple" },
+    { id: 3, name: "Seeded Multigrain", category: "bread", desc: "Flax, sunflower, pumpkin seeds. High fiber.", price: "$5.50", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "Healthy" },
+    { id: 4, name: "Butter Croissant", category: "pastry", desc: "64 layers, flaky & golden.", price: "$4.25", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80", badge: "Viennoiserie" },
+    { id: 5, name: "Pain au Chocolat", category: "pastry", desc: "Dark chocolate batons in buttery dough.", price: "$4.50", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80", badge: "Chocolate" },
+    { id: 6, name: "Cinnamon Swirl", category: "pastry", desc: "Cream cheese glaze & brown sugar.", price: "$5.25", img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=500&q=80", badge: "Pastry" },
+    { id: 7, name: "Birthday Grand Cake", category: "cake", desc: "Customizable layers, buttercream/ganache.", price: "from $35", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&q=80", badge: "Celebration" },
+    { id: 8, name: "Signature Tiered Cake", category: "cake", desc: "Wedding / anniversary, any flavor.", price: "Inquire", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&q=80", badge: "Custom" },
+    { id: 9, name: "Bespoke Birthday Cake", category: "cake", desc: "Personalized toppers & filling choices.", price: "from $42", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&q=80", badge: "Buttercream" },
+    { id: 10, name: "Spinach & Feta Quiche", category: "savory", desc: "Buttery crust, perfect for brunch.", price: "$8.25", img: "https://images.unsplash.com/photo-1571126891846-1d46ad0e4cb2?w=500&q=80", badge: "Savory bake" },
+    { id: 11, name: "Seasonal Fruit Tart", category: "sweet", desc: "Vanilla custard, glazed berries.", price: "$6.90", img: "https://images.unsplash.com/photo-1603532648955-039310d9a75b?w=500&q=80", badge: "Patisserie" },
+    { id: 12, name: "Brown Butter Cookies", category: "sweet", desc: "Chunky dark chocolate, sea salt.", price: "$12/dozen", img: "https://images.unsplash.com/photo-1574085733277-851c9d3f3c3e?w=500&q=80", badge: "Cookie box" },
+    { id: 13, name: "Raspberry Danish", category: "pastry", desc: "Tangy fruit & vanilla drizzle.", price: "$4.80", img: "https://images.unsplash.com/photo-1611320955216-9d6ac8a1f023?w=500&q=80", badge: "Viennoiserie" },
+    { id: 14, name: "Brioche à Tête", category: "bread", desc: "Rich, eggy, soft-crumb delight.", price: "$6.50", img: "https://images.unsplash.com/photo-1623334044303-2410211483f3?w=500&q=80", badge: "Sweet bread" },
+    { id: 15, name: "French Macarons", category: "sweet", desc: "Pistachio, rose, chocolate flavors.", price: "$18/box", img: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=500&q=80", badge: "Premium" }
+  ];
+
+  // render product grid
+  function renderProducts(filterCategory = null) {
+    const container = document.getElementById('productCatalog');
+    if (!container) return;
+    let filtered = bakeryProducts;
+    if (filterCategory && filterCategory !== 'all') {
+      filtered = bakeryProducts.filter(p => p.category === filterCategory);
+    }
+    if (filtered.length === 0) {
+      container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">✨ No products in this category, explore other sections ✨</div>`;
+      return;
+    }
+    container.innerHTML = filtered.map(prod => `
+      <div class="product-card" data-product='${JSON.stringify(prod)}'>
+        <img src="${prod.img}" alt="${prod.name}" loading="lazy">
+        <div class="product-info">
+          <h3>${prod.name}</h3>
+          <div class="badge-prod">${prod.badge}</div>
+          <p style="color:#bcb09b; font-size:0.85rem; margin:6px 0;">${prod.desc}</p>
+          <div class="price-gold">${prod.price}</div>
+          <button class="order-btn-mini quick-order" data-pname="${prod.name}">🛒 Quick Order → WhatsApp</button>
+        </div>
+      </div>
+    `).join('');
+
+    // attach quick order events
+    document.querySelectorAll('.quick-order').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const productName = btn.getAttribute('data-pname');
+        // prefill product order form (on products page)
+        const prodDetailsField = document.getElementById('prodDetails');
+        if (prodDetailsField) {
+          prodDetailsField.value = `I'd like to order: ${productName} (from catalog). Please assist.`;
+          document.getElementById('prodName')?.focus();
+          alert(`✨ "${productName}" added to order box! Fill name & phone, then send.`);
+        } else {
+          // fallback whatsapp
+          sendWhatsAppDirect("Burjeon's Bakes Customer", "0712345678", `Interested in ${productName}`);
+        }
+      });
+    });
+  }
+
+  // switch between home and products (app-style)
+  function switchToPage(pageId) {
+    const homePage = document.getElementById('homePage');
+    const productsPage = document.getElementById('productsPage');
+    const homeBtn = document.getElementById('homeNavBtn');
+    const prodBtn = document.getElementById('productsNavBtn');
     
-    if (pageNumber === 1) {
-      page1.classList.remove('hidden-page');
-      page2.classList.add('hidden-page');
-      btn1.classList.add('active');
-      btn2.classList.remove('active');
-      // update URL hash for possible user comfort
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (pageId === 'home') {
+      homePage.classList.add('active-page');
+      productsPage.classList.remove('active-page');
+      homeBtn.classList.add('active');
+      prodBtn.classList.remove('active');
+      // scroll top
+      document.querySelector('.pages-area').scrollTop = 0;
     } else {
-      page1.classList.add('hidden-page');
-      page2.classList.remove('hidden-page');
-      btn2.classList.add('active');
-      btn1.classList.remove('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      homePage.classList.remove('active-page');
+      productsPage.classList.add('active-page');
+      prodBtn.classList.add('active');
+      homeBtn.classList.remove('active');
+      // re-render full products if needed
+      renderProducts(null);
+      document.querySelector('.pages-area').scrollTop = 0;
     }
   }
 
-  // unified WhatsApp sender (both forms share same logic)
-  function sendWhatsappOrder(name, phone, details, event) {
+  // WhatsApp sender utility
+  function sendWhatsAppOrder(name, phone, details, event) {
     if (event) event.preventDefault();
     if (!name || !phone) {
-      alert("❌ Please enter your name and phone number so we can assist you.");
+      alert("❌ Please enter your name and phone number.");
       return false;
     }
-    const cleanedPhone = phone.replace(/[\s\-+()]/g, '');
-    if (cleanedPhone.length < 6) {
-      alert("📞 Please enter a valid phone number (with area code).");
+    const cleaned = phone.replace(/[\s\-+()]/g, '');
+    if (cleaned.length < 6) {
+      alert("📞 Please enter a valid phone number.");
       return false;
     }
-    const bakeryNumber = "254700000000";  // replace with real Berjoen WhatsApp
-    const orderMsg = `🫓 *BERJOEN BAKERY ORDER* 🫓\n\n👤 *Customer:* ${name}\n📞 *Contact:* ${phone}\n🍞 *Order details:* ${details}\n\n_Thank you for choosing artisan quality!_ 🥐`;
-    const encoded = encodeURIComponent(orderMsg);
-    const waLink = `https://wa.me/${bakeryNumber}?text=${encoded}`;
-    const confirmSend = confirm(`Hi ${name}, ready to send bakery order via WhatsApp? You'll be redirected to chat with Berjoen Bakery.`);
+    const bakeryNumber = "254700000000"; // demo number, replace with actual
+    const msg = `🫓 *BURJEON'S BAKES ORDER* 🫓\n\n👤 Customer: ${name}\n📞 Contact: ${phone}\n🍞 Order: ${details || "Bakery order"}\n\nThank you! 🙌`;
+    const url = `https://wa.me/${bakeryNumber}?text=${encodeURIComponent(msg)}`;
+    const confirmSend = confirm(`📱 Send order to Burjeon's Bakes via WhatsApp?`);
     if (confirmSend) {
-      window.open(waLink, '_blank');
+      window.open(url, '_blank');
       alert("✅ Order request sent! We'll reply shortly.");
       return true;
     }
     return false;
   }
 
-  // Form 1 (page1)
-  const form1 = document.getElementById('whatsappOrderForm');
-  if (form1) {
-    form1.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('custName').value.trim();
-      const phone = document.getElementById('custPhone').value.trim();
-      const details = document.getElementById('orderDetails').value.trim() || "No extra details, bakery order.";
-      sendWhatsappOrder(name, phone, details, e);
-      // optionally reset?
-    });
+  // direct fallback (quick order)
+  function sendWhatsAppDirect(name, phone, details) {
+    const bakeryNumber = "254700000000";
+    const msg = `🫓 *BURJEON'S BAKES* - Quick inquiry\n👤 ${name}\n📞 ${phone}\n📦 ${details}`;
+    window.open(`https://wa.me/${bakeryNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
-  // Form 2 (page2)
-  const form2 = document.getElementById('whatsappOrderFormPage2');
-  if (form2) {
-    form2.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('custName2').value.trim();
-      const phone = document.getElementById('custPhone2').value.trim();
-      const details = document.getElementById('orderDetails2').value.trim() || "Interested in bakery items from menu.";
-      sendWhatsappOrder(name, phone, details, e);
-    });
-  }
-
-  // set initial page visible, brown/grey background already applied, images stay original
-  window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('page1').classList.remove('hidden-page');
-    document.getElementById('page2').classList.add('hidden-page');
-    // Scroll reveal dynamic
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0px)';
-        }
-      });
-    }, { threshold: 0.1 });
-    sections.forEach(sec => {
-      sec.style.opacity = '0';
-      sec.style.transform = 'translateY(15px)';
-      sec.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(sec);
-    });
-    // hero reveal
-    const hero = document.querySelector('.hero');
-    if(hero) hero.style.opacity = '1';
+  // Event listeners for forms
+  document.getElementById('homeOrderForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('homeName').value.trim();
+    const phone = document.getElementById('homePhone').value.trim();
+    const details = document.getElementById('homeDetails').value.trim() || "Bakery order from home";
+    sendWhatsAppOrder(name, phone, details, e);
   });
 
-  // ensure active page buttons reflect current page if hash
-  window.switchPage = switchPage;
+  document.getElementById('productOrderForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('prodName').value.trim();
+    const phone = document.getElementById('prodPhone').value.trim();
+    const details = document.getElementById('prodDetails').value.trim() || "Product catalog order";
+    sendWhatsAppOrder(name, phone, details, e);
+  });
+
+  // navigation buttons
+  document.getElementById('homeNavBtn')?.addEventListener('click', () => switchToPage('home'));
+  document.getElementById('productsNavBtn')?.addEventListener('click', () => switchToPage('products'));
+  document.getElementById('exploreProductsBtn')?.addEventListener('click', () => switchToPage('products'));
+
+  // Category filter feature: from home page category clicks -> go to product page + filter
+  const categoryMap = {
+    bread: "bread",
+    pastry: "pastry",
+    cake: "cake",
+    savory: "savory",
+    sweet: "sweet"
+  };
+  document.querySelectorAll('.home-category').forEach(catDiv => {
+    catDiv.addEventListener('click', (e) => {
+      const cat = catDiv.getAttribute('data-category');
+      if (cat && categoryMap[cat]) {
+        switchToPage('products');
+        setTimeout(() => {
+          renderProducts(cat);
+          // scroll slight
+          document.querySelector('.pages-area').scrollTop = 0;
+          const banner = document.querySelector('#productsPage h2');
+          if(banner) banner.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 50);
+      }
+    });
+  });
+
+  // initial load home page, preload products content
+  renderProducts(null);
+  // set active nav highlight
+  document.getElementById('homeNavBtn')?.classList.add('active');
+  window.addEventListener('load', () => {
+    // fix any double rendering
+    document.querySelector('.pages-area').scrollTop = 0;
+  });
 </script>
 </body>
-  </html>
+</html>
