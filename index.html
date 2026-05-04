@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berjoen Bakery</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#fffaf5;color:#222;}
+
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:white;
+  display:flex;
+  justify-content:space-between;
+  padding:15px 40px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:1000;
+}
+
+header h1{color:#e67e22;}
+header a{margin-left:20px;text-decoration:none;color:#333;font-weight:bold;}
+
+.hero{
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1519869325930-281384150729') center/cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  text-align:center;
+  position:relative;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero h2{font-size:50px;}
+.hero p{margin:15px 0;font-size:18px;}
+
+.btn{
+  background:#e67e22;
+  padding:12px 25px;
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+}
+
+.section{
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card p{
+  padding:15px;
+  font-weight:bold;
+}
+
+.about{
+  background:#fff3e6;
+  padding:40px;
+  border-radius:15px;
+  text-align:center;
+}
+
+form{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  max-width:600px;
+  margin:auto;
+}
+
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#e67e22;
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#222;
+  color:white;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>Berjoen Bakery</h1>
+  <div>
+    <a href="#cakes">Cakes</a>
+    <a href="#about">About</a>
+    <a href="#order">Order</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Premium Cakes For Every Occasion</h2>
+    <p>Birthday • Wedding • Custom Cakes</p>
+    <a href="#order" class="btn">Order Now</a>
+  </div>
+</section>
+
+<section class="section" id="cakes">
+  <h2>Our Cakes</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c">
+      <p>Birthday Cakes</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a">
+      <p>Chocolate Cakes</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e">
+      <p>Custom Designs</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="about">
+    <h2>About Us</h2>
+    <p>
+      At Berjoen Bakery, we create fresh, beautiful cakes for all your special moments.
+      From birthdays to weddings, we make every celebration memorable.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="order">
+  <h2>Place Your Order</h2>
+  <form onsubmit="sendOrder(); return false;">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <textarea id="details" placeholder="Describe your cake"></textarea>
+    <button type="submit">Order via WhatsApp</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 Berjoen Bakery</p>
+</footer>
+
+<script>
+function sendOrder(){
+  const name=document.getElementById('name').value;
+  const phone=document.getElementById('phone').value;
+  const details=document.getElementById('details').value;
+
+  const msg=`Hello, my name is ${name}. I want to order a cake. Details: ${details}. My number is ${phone}`;
+
+  window.open('https://wa.me/254700000000?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+
+</body>
+</html>
