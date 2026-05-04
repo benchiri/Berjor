@@ -1,212 +1,636 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Berjoen Bakery</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Berjoen Bakery | Golden Crust & Artisan Breads</title>
+  <meta name="description" content="Berjoen Bakery — premium artisan breads, pastries, cakes, and custom bakes. Order online via WhatsApp.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:#fffaf5;color:#222;}
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
 
-header{
-  position:fixed;
-  width:100%;
-  top:0;
-  background:white;
-  display:flex;
-  justify-content:space-between;
-  padding:15px 40px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  z-index:1000;
-}
+    /* scroll padding for fixed header */
+    html {
+      scroll-padding-top: 90px;
+      scroll-behavior: smooth;
+    }
 
-header h1{color:#e67e22;}
-header a{margin-left:20px;text-decoration:none;color:#333;font-weight:bold;}
+    /* ----- HEADER (dark + gold) ----- */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: #0f0f0f;
+      backdrop-filter: blur(8px);
+      background-color: rgba(10, 10, 10, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      border-bottom: 1px solid #b88b2c30;
+      flex-wrap: wrap;
+    }
 
-.hero{
-  height:100vh;
-  background:url('https://images.unsplash.com/photo-1519869325930-281384150729') center/cover;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  text-align:center;
-  position:relative;
-}
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e6b422, #c98f2c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
 
-.hero::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.5);
-}
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
 
-.hero-content{
-  position:relative;
-  z-index:2;
-}
+    header a {
+      text-decoration: none;
+      color: #cfcfcf;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: 0.2s ease;
+      letter-spacing: 0.3px;
+    }
 
-.hero h2{font-size:50px;}
-.hero p{margin:15px 0;font-size:18px;}
+    header a:hover {
+      color: #e6b422;
+      text-shadow: 0 0 4px rgba(230, 180, 34, 0.4);
+    }
 
-.btn{
-  background:#e67e22;
-  padding:12px 25px;
-  color:white;
-  text-decoration:none;
-  border-radius:8px;
-}
+    /* page indicator dots / active state */
+    .page-btn {
+      background: #2a241a;
+      border: 1px solid #b88b2c;
+      color: #e6b422;
+      padding: 6px 16px;
+      border-radius: 60px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .page-btn.active {
+      background: #e6b422;
+      color: #0a0a0a;
+      border-color: #e6b422;
+    }
+    .page-switch {
+      display: flex;
+      gap: 12px;
+      margin-left: 20px;
+    }
 
-.section{
-  padding:80px 20px;
-  max-width:1100px;
-  margin:auto;
-}
+    /* ----- main pages container (two-page layout) ----- */
+    .pages-container {
+      position: relative;
+      width: 100%;
+      overflow-x: hidden;
+    }
 
-.section h2{
-  text-align:center;
-  margin-bottom:40px;
-}
+    .page {
+      transition: transform 0.4s ease-in-out, opacity 0.3s;
+      width: 100%;
+      will-change: transform;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
+    .page.hidden-page {
+      display: none;
+    }
 
-.card{
-  background:white;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+    /* ----- HERO section (page 1) Gold/brown over black ----- */
+    .hero {
+      height: 90vh;
+      min-height: 560px;
+      background: linear-gradient(115deg, rgba(0,0,0,0.75) 0%, rgba(30,20,10,0.7) 100%), url('https://images.unsplash.com/photo-1519869325930-281384150729?w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 70px;
+      border-radius: 0 0 32px 32px;
+    }
 
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
 
-.card p{
-  padding:15px;
-  font-weight:bold;
-}
+    .hero h2 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e6b422, #c17f2e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
 
-.about{
-  background:#fff3e6;
-  padding:40px;
-  border-radius:15px;
-  text-align:center;
-}
+    .hero p {
+      font-size: 1.25rem;
+      color: #d4cdb2;
+      margin-bottom: 2rem;
+    }
 
-form{
-  background:white;
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  max-width:600px;
-  margin:auto;
-}
+    .btn-gold {
+      background: #b87c2e;
+      background: linear-gradient(105deg, #c68524, #a5661a);
+      padding: 14px 34px;
+      color: #0f0f0f;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 800;
+      display: inline-block;
+      transition: 0.2s;
+      box-shadow: 0 8px 18px rgba(184, 139, 44, 0.3);
+      border: none;
+      font-size: 1rem;
+    }
 
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-}
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      background: #daa42b;
+      box-shadow: 0 12px 26px rgba(230, 180, 52, 0.4);
+      color: #0a0a0a;
+    }
 
-button{
-  width:100%;
-  padding:12px;
-  background:#e67e22;
-  color:white;
-  border:none;
-  border-radius:8px;
-}
+    /* section styling */
+    .section {
+      padding: 70px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
 
-footer{
-  text-align:center;
-  padding:30px;
-  background:#222;
-  color:white;
-}
-</style>
+    .section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #e6b422;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .section h2:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #e6b422;
+      margin: 16px auto 0;
+      border-radius: 4px;
+    }
 
+    /* product grid — bakery items: breads, pastries, etc */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: #171412;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid #3e3328;
+      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.6);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #c98f2c;
+      box-shadow: 0 20px 30px -12px rgba(230, 180, 34, 0.2);
+    }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: 0.3s;
+    }
+    .card:hover img {
+      transform: scale(1.02);
+    }
+    .card-content {
+      padding: 20px 18px;
+    }
+    .card-content h3 {
+      font-size: 1.5rem;
+      color: #e6b422;
+      margin-bottom: 8px;
+    }
+    .card-content p {
+      color: #bcb09b;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .price {
+      font-weight: 800;
+      color: #e6b422;
+      letter-spacing: 0.5px;
+      font-size: 1.2rem;
+    }
+
+    /* about section (brown/grey background) */
+    .about {
+      background: #1e1b17;
+      padding: 48px 40px;
+      border-radius: 44px;
+      text-align: center;
+      border-left: 4px solid #e6b422;
+      border-right: 4px solid #e6b42220;
+    }
+    .about p {
+      font-size: 1.2rem;
+      color: #d6cfbc;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* order form */
+    .order-form-container {
+      background: #14110e;
+      padding: 36px 32px;
+      border-radius: 40px;
+      border: 1px solid #4a3b2c;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0 4px;
+      border: 1px solid #4a3b2c;
+      border-radius: 28px;
+      font-size: 1rem;
+      background: #221f1b;
+      color: #ece2d4;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #e6b422;
+      box-shadow: 0 0 0 2px #e6b42240;
+      background: #2b241e;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(95deg, #c38225, #a05e16);
+      border: none;
+      border-radius: 40px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #0e0e0e;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 18px;
+    }
+    button:hover {
+      background: #da9f2c;
+      transform: scale(0.98);
+    }
+    .order-note {
+      text-align: center;
+      font-size: 0.7rem;
+      margin-top: 14px;
+      color: #aa9f8a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      background: #060504;
+      border-top: 1px solid #3a2e22;
+      color: #b9ae96;
+      font-size: 0.85rem;
+    }
+
+    /* second page (menu / all bakery items) */
+    .bakery-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .menu-card {
+      background: #171412;
+      border-radius: 28px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #4a3826;
+      transition: 0.2s;
+    }
+    .menu-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+    .menu-info {
+      padding: 18px;
+    }
+    .menu-info h4 {
+      font-size: 1.3rem;
+      color: #e6b422;
+    }
+    .badge {
+      background: #2f2a22;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 24px;
+      font-size: 0.7rem;
+      color: #e6b422;
+      margin: 10px 0 8px;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        padding: 12px 24px;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+      .section h2 {
+        font-size: 2rem;
+      }
+      .page-switch {
+        margin-top: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>Berjoen Bakery</h1>
-  <div>
-    <a href="#cakes">Cakes</a>
-    <a href="#about">About</a>
-    <a href="#order">Order</a>
+  <h1>🥖 BERJOEN BAKERY</h1>
+  <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+    <div class="nav-links">
+      <a href="#" onclick="switchPage(1); return false;">Home</a>
+      <a href="#" onclick="switchPage(2); return false;">Full Bakery</a>
+      <a href="#" onclick="switchPage(1); document.getElementById('order-section-home').scrollIntoView({behavior:'smooth'}); return false;">Order</a>
+    </div>
+    <div class="page-switch">
+      <button class="page-btn active" id="btnPage1" onclick="switchPage(1)">🍞 Page 1</button>
+      <button class="page-btn" id="btnPage2" onclick="switchPage(2)">🥐 Page 2</button>
+    </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-content">
-    <h2>Premium Cakes For Every Occasion</h2>
-    <p>Birthday • Wedding • Custom Cakes</p>
-    <a href="#order" class="btn">Order Now</a>
-  </div>
-</section>
+<div class="pages-container">
+  <!-- ================= PAGE 1 - HOME & ORDER & CAKES + BAKERY HIGHLIGHTS ================= -->
+  <div id="page1" class="page">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Golden Crust · Artisan Soul</h2>
+        <p>Hand-shaped sourdough • flaky pastries • custom celebration cakes</p>
+        <a href="#order-section-home" class="btn-gold">✨ Order Fresh Bakes</a>
+      </div>
+    </section>
 
-<section class="section" id="cakes">
-  <h2>Our Cakes</h2>
-  <div class="grid">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c">
-      <p>Birthday Cakes</p>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a">
-      <p>Chocolate Cakes</p>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e">
-      <p>Custom Designs</p>
-    </div>
-  </div>
-</section>
+    <!-- bakery specialties (what you find in a bakery) breads, croissants, etc -->
+    <section class="section">
+      <h2>From Our Oven</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Artisan sourdough">
+          <div class="card-content">
+            <h3>🧺 Rustic Sourdough</h3>
+            <p>Slow-fermented, crackling crust, deep flavor.</p>
+            <span class="price">from $7.50</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Chocolate croissant">
+          <div class="card-content">
+            <h3>🥐 Butter Croissant</h3>
+            <p>Flaky, golden, 64 layers of pure bliss.</p>
+            <span class="price">$4.25</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&q=80" alt="Cinnamon rolls">
+          <div class="card-content">
+            <h3>🍥 Cinnamon Swirl</h3>
+            <p>Soft dough, cream cheese glaze & brown sugar.</p>
+            <span class="price">$4.90</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=600&q=80" alt="Birthday cake">
+          <div class="card-content">
+            <h3>🎂 Birthday Grand</h3>
+            <p>Customized layers, buttercream & ganache.</p>
+            <span class="price">from $35</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="section">
-  <div class="about">
-    <h2>About Us</h2>
-    <p>
-      At Berjoen Bakery, we create fresh, beautiful cakes for all your special moments.
-      From birthdays to weddings, we make every celebration memorable.
-    </p>
-  </div>
-</section>
+    <!-- about bakery (brown/grey theme) -->
+    <section class="section">
+      <div class="about">
+        <h2 style="color:#e6b422;">Heritage & Warmth</h2>
+        <p>🔥 Berjoen Bakery blends old-world craftsmanship with modern elegance. Every loaf, pastry, and cake is made from scratch using premium grains, real butter, and organic inspiration. Whether it's a rustic baguette or a tiered wedding cake, we bake memories.</p>
+      </div>
+    </section>
 
-<section class="section" id="order">
-  <h2>Place Your Order</h2>
-  <form onsubmit="sendOrder(); return false;">
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="tel" id="phone" placeholder="Phone Number" required>
-    <textarea id="details" placeholder="Describe your cake"></textarea>
-    <button type="submit">Order via WhatsApp</button>
-  </form>
-</section>
+    <!-- full order section (WhatsApp) -->
+    <section class="section" id="order-section-home">
+      <h2>Place Your Bakery Order</h2>
+      <div class="order-form-container">
+        <form id="whatsappOrderForm">
+          <input type="text" id="custName" placeholder="Your name" required>
+          <input type="tel" id="custPhone" placeholder="WhatsApp / phone number" required>
+          <textarea id="orderDetails" rows="3" placeholder="Describe your order: bread type, cake design, pastries quantity, preferred pickup date..."></textarea>
+          <button type="submit" id="sendOrderBtn">📞 Send via WhatsApp → Berjoen Bakery</button>
+          <div class="order-note">We reply within 15 min — confirm your custom cake or fresh bread order ✨</div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= PAGE 2 - FULL BAKERY CATALOG (breads, pastries, cakes, savories) ================= -->
+  <div id="page2" class="page hidden-page">
+    <section class="section" style="margin-top: 30px;">
+      <h2>🥨 The Complete Bakery 🥖</h2>
+      <p style="text-align: center; margin-bottom: 40px; color: #cfc6b2;">Sourdough · Viennoiserie · Tarts · Cookies · Celebration Cakes</p>
+      <div class="bakery-menu-grid">
+        <!-- breads -->
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1585478259715-7b5c5e3c4f6b?w=600&q=80" alt="Baguette">
+          <div class="menu-info"><h4>🇫🇷 Classic Baguette</h4><div class="badge">Artisan bread</div><p>Crispy crust, airy crumb — daily baked.</p><span class="price">$3.90</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Multigrain">
+          <div class="menu-info"><h4>🌾 Seeded Multigrain</h4><div class="badge">High fiber</div><p>Flax, sunflower & pumpkin seeds.</p><span class="price">$5.50</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Pain au chocolat">
+          <div class="menu-info"><h4>🍫 Pain au Chocolat</h4><div class="badge">Viennoiserie</div><p>Dark chocolate batons in buttery layers.</p><span class="price">$4.50</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&q=80" alt="Cinnamon buns">
+          <div class="menu-info"><h4>✨ Sticky Cinnamon Buns</h4><div class="badge">Pastry</div><p>Pecan + cream cheese frosting.</p><span class="price">$5.25</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80" alt="Wedding tier cake">
+          <div class="menu-info"><h4>🎂 Signature Tiered Cake</h4><div class="badge">Custom</div><p>Wedding / anniversary, any flavor.</p><span class="price">Inquire</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=600&q=80" alt="Birthday cake design">
+          <div class="menu-info"><h4>🎈 Bespoke Birthday Cake</h4><div class="badge">Buttercream</div><p>Personalized toppers & filling choices.</p><span class="price">from $42</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1603532648955-039310d9a75b?w=600&q=80" alt="Fruit tart">
+          <div class="menu-info"><h4>🍓 Seasonal Fruit Tart</h4><div class="badge">Patisserie</div><p>Vanilla custard, glazed berries.</p><span class="price">$6.90</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1574085733277-851c9d3f3c3e?w=600&q=80" alt="Chocolate chip cookies">
+          <div class="menu-info"><h4>🍪 Brown Butter Cookies</h4><div class="badge">Cookie box</div><p>Chunky dark chocolate, sea salt.</p><span class="price">$12/dozen</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1571126891846-1d46ad0e4cb2?w=600&q=80" alt="Savory quiche">
+          <div class="menu-info"><h4>🧀 Spinach & Feta Quiche</h4><div class="badge">Savory bake</div><p>Perfect for brunch, buttery crust.</p><span class="price">$8.25</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- small order prompt on page 2 also but consistent -->
+    <section class="section">
+      <div class="order-form-container">
+        <h3 style="color:#e6b422; text-align:center; margin-bottom: 24px;">📦 Request any item from our Bakery</h3>
+        <form id="whatsappOrderFormPage2">
+          <input type="text" id="custName2" placeholder="Full name" required>
+          <input type="tel" id="custPhone2" placeholder="Your phone number" required>
+          <textarea id="orderDetails2" rows="3" placeholder="Which bakery items? e.g. 2 sourdough loaves, 1 birthday cake (chocolate), 6 croissants..."></textarea>
+          <button type="submit" class="btn-gold" style="background: #c68524; color: #0a0a0a;">🍞 Order via WhatsApp</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
 
 <footer>
-  <p>© 2026 Berjoen Bakery</p>
+  <p>© 2026 Berjoen Bakery — Warmth, flour & gold | Black & Gold Edition</p>
+  <p style="margin-top: 0.5rem;">📍 Nairobi | Fresh baked daily — order by 4pm for next day delivery</p>
 </footer>
 
 <script>
-function sendOrder(){
-  const name=document.getElementById('name').value;
-  const phone=document.getElementById('phone').value;
-  const details=document.getElementById('details').value;
+  // Two-page navigation with black/gold theme persistence
+  function switchPage(pageNumber) {
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const btn1 = document.getElementById('btnPage1');
+    const btn2 = document.getElementById('btnPage2');
+    
+    if (pageNumber === 1) {
+      page1.classList.remove('hidden-page');
+      page2.classList.add('hidden-page');
+      btn1.classList.add('active');
+      btn2.classList.remove('active');
+      // update URL hash for possible user comfort
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      page1.classList.add('hidden-page');
+      page2.classList.remove('hidden-page');
+      btn2.classList.add('active');
+      btn1.classList.remove('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 
-  const msg=`Hello, my name is ${name}. I want to order a cake. Details: ${details}. My number is ${phone}`;
+  // unified WhatsApp sender (both forms share same logic)
+  function sendWhatsappOrder(name, phone, details, event) {
+    if (event) event.preventDefault();
+    if (!name || !phone) {
+      alert("❌ Please enter your name and phone number so we can assist you.");
+      return false;
+    }
+    const cleanedPhone = phone.replace(/[\s\-+()]/g, '');
+    if (cleanedPhone.length < 6) {
+      alert("📞 Please enter a valid phone number (with area code).");
+      return false;
+    }
+    const bakeryNumber = "254700000000";  // replace with real Berjoen WhatsApp
+    const orderMsg = `🫓 *BERJOEN BAKERY ORDER* 🫓\n\n👤 *Customer:* ${name}\n📞 *Contact:* ${phone}\n🍞 *Order details:* ${details}\n\n_Thank you for choosing artisan quality!_ 🥐`;
+    const encoded = encodeURIComponent(orderMsg);
+    const waLink = `https://wa.me/${bakeryNumber}?text=${encoded}`;
+    const confirmSend = confirm(`Hi ${name}, ready to send bakery order via WhatsApp? You'll be redirected to chat with Berjoen Bakery.`);
+    if (confirmSend) {
+      window.open(waLink, '_blank');
+      alert("✅ Order request sent! We'll reply shortly.");
+      return true;
+    }
+    return false;
+  }
 
-  window.open('https://wa.me/254700000000?text='+encodeURIComponent(msg),'_blank');
-}
+  // Form 1 (page1)
+  const form1 = document.getElementById('whatsappOrderForm');
+  if (form1) {
+    form1.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const details = document.getElementById('orderDetails').value.trim() || "No extra details, bakery order.";
+      sendWhatsappOrder(name, phone, details, e);
+      // optionally reset?
+    });
+  }
+
+  // Form 2 (page2)
+  const form2 = document.getElementById('whatsappOrderFormPage2');
+  if (form2) {
+    form2.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('custName2').value.trim();
+      const phone = document.getElementById('custPhone2').value.trim();
+      const details = document.getElementById('orderDetails2').value.trim() || "Interested in bakery items from menu.";
+      sendWhatsappOrder(name, phone, details, e);
+    });
+  }
+
+  // set initial page visible, brown/grey background already applied, images stay original
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('page1').classList.remove('hidden-page');
+    document.getElementById('page2').classList.add('hidden-page');
+    // Scroll reveal dynamic
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0px)';
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(sec => {
+      sec.style.opacity = '0';
+      sec.style.transform = 'translateY(15px)';
+      sec.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(sec);
+    });
+    // hero reveal
+    const hero = document.querySelector('.hero');
+    if(hero) hero.style.opacity = '1';
+  });
+
+  // ensure active page buttons reflect current page if hash
+  window.switchPage = switchPage;
 </script>
-
 </body>
-</html>
+  </html>
