@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-  <title>Burjeon's Salon & Spa | Elegance Redefined</title>
-  <meta name="description" content="Burjeon's Salon & Spa — premium hair, nails, bridal styling, and relaxation treatments in Nairobi. Book appointments via WhatsApp.">
+  <title>DemoElectronics | Premium Gadgets & Appliances</title>
+  <meta name="description" content="DemoElectronics - Shop the latest smartphones, laptops, audio gear, and home appliances. Best prices in Kenya. Order via WhatsApp.">
   <style>
     * {
       margin: 0;
@@ -55,6 +55,7 @@
     .header-actions {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
     .nav-icon {
       background: none;
@@ -73,6 +74,24 @@
     }
     .nav-icon:hover {
       background: #e6b42220;
+    }
+    .cart-icon {
+      position: relative;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      background: #e6b422;
+      color: #0a0a0a;
+      font-size: 0.7rem;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 2px 6px;
+      min-width: 18px;
+      text-align: center;
     }
 
     /* Main scrollable pages area */
@@ -99,7 +118,7 @@
 
     /* Hero Section */
     .hero-app {
-      background: linear-gradient(115deg, rgba(0,0,0,0.75) 0%, rgba(30,20,10,0.8) 100%), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80') center/cover no-repeat;
+      background: linear-gradient(115deg, rgba(0,0,0,0.75) 0%, rgba(30,20,10,0.8) 100%), url('https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=1200&q=80') center/cover no-repeat;
       margin: 20px 20px 24px 20px;
       border-radius: 32px;
       padding: 50px 20px;
@@ -118,7 +137,7 @@
     }
     .btn-large {
       background: linear-gradient(105deg, #c68524, #a5661a);
-      padding: 14px 24px;
+      padding: 14px 28px;
       border-radius: 60px;
       font-weight: 800;
       text-align: center;
@@ -146,13 +165,13 @@
       align-items: center;
       gap: 12px;
     }
-    .grid-services {
+    .category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 18px;
       margin-top: 8px;
     }
-    .service-card {
+    .category-card {
       background: #1f1b17;
       border-radius: 24px;
       padding: 20px 12px;
@@ -161,27 +180,17 @@
       border: 1px solid #4a3826;
       cursor: pointer;
     }
-    .service-card:hover {
+    .category-card:hover {
       transform: translateY(-4px);
       border-color: #e6b422;
     }
-    .service-card span {
+    .category-card span {
       font-size: 2.2rem;
       display: block;
     }
-    .service-card h4 {
+    .category-card h4 {
       color: #e6b422;
       margin: 10px 0 5px;
-    }
-    .service-card p {
-      font-size: 0.8rem;
-      color: #bcb09b;
-    }
-    .price {
-      font-weight: bold;
-      color: #e6b422;
-      margin-top: 8px;
-      display: block;
     }
 
     .feature-list {
@@ -198,32 +207,33 @@
       text-align: center;
     }
 
-    /* Product/Service Grid (full catalog) */
-    .service-grid {
+    /* Product Grid */
+    .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
       padding: 0 20px;
       margin-top: 10px;
     }
-    .service-product-card {
+    .product-card {
       background: #171412;
       border-radius: 28px;
       overflow: hidden;
       border: 1px solid #3e3328;
       transition: 0.2s;
+      position: relative;
     }
-    .service-product-card img {
+    .product-card img {
       width: 100%;
       height: 190px;
       object-fit: cover;
     }
-    .service-info {
+    .product-info {
       padding: 18px;
     }
-    .service-info h3 {
+    .product-info h3 {
       color: #e6b422;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
     .badge {
       background: #2f2a22;
@@ -234,12 +244,19 @@
       color: #e6b422;
       margin: 8px 0;
     }
-    .price-gold {
+    .price {
       font-weight: 800;
       color: #e6b422;
       font-size: 1.2rem;
+      margin: 8px 0;
     }
-    .book-btn {
+    .old-price {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+    .add-to-cart {
       background: #c68524;
       border: none;
       padding: 10px 16px;
@@ -249,6 +266,120 @@
       width: 100%;
       color: #0a0a0a;
       cursor: pointer;
+      transition: 0.2s;
+    }
+    .add-to-cart:hover {
+      background: #daa42b;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 380px;
+      max-width: 90%;
+      height: 100vh;
+      background: #14110e;
+      border-left: 2px solid #e6b422;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.8);
+    }
+    .cart-sidebar.open {
+      right: 0;
+    }
+    .cart-header {
+      padding: 20px;
+      border-bottom: 1px solid #3a2e22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-header h3 {
+      color: #e6b422;
+    }
+    .close-cart {
+      background: none;
+      border: none;
+      color: #e6b422;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #2a241a;
+    }
+    .cart-item-info {
+      flex: 2;
+    }
+    .cart-item-title {
+      font-weight: bold;
+    }
+    .cart-item-price {
+      color: #e6b422;
+      font-size: 0.9rem;
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty-btn {
+      background: #2a241a;
+      border: none;
+      color: #e6b422;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .remove-item {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      margin-left: 12px;
+    }
+    .cart-total {
+      padding: 20px;
+      border-top: 1px solid #3a2e22;
+      text-align: center;
+    }
+    .checkout-btn {
+      background: linear-gradient(95deg, #c38225, #a05e16);
+      border: none;
+      border-radius: 60px;
+      padding: 14px;
+      font-weight: 800;
+      color: #0a0a0a;
+      width: 100%;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
     }
 
     /* Form */
@@ -259,7 +390,7 @@
       padding: 28px;
       border: 1px solid #4a3b2c;
     }
-    input, textarea, select {
+    input, textarea {
       width: 100%;
       padding: 14px 18px;
       margin: 8px 0 12px;
@@ -293,280 +424,295 @@
     @media (max-width: 600px) {
       .hero-app h2 { font-size: 1.8rem; }
       .section-title { font-size: 1.5rem; }
+      .cart-sidebar { width: 100%; right: -100%; }
     }
   </style>
 </head>
 <body>
 <div class="app-container">
   <div class="app-header">
-    <h1>💇 BURJEON'S SALON</h1>
+    <h1>⚡ DEMOELECTRONICS</h1>
     <div class="header-actions">
-      <button class="nav-icon" id="homeNavBtn" data-page="home">🏠 Home</button>
-      <button class="nav-icon" id="servicesNavBtn" data-page="services">💆 Services</button>
+      <button class="nav-icon" id="homeNavBtn">🏠 Home</button>
+      <button class="nav-icon" id="productsNavBtn">📱 Shop</button>
+      <div class="cart-icon" id="cartIcon">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </div>
     </div>
   </div>
 
   <div class="pages-area">
-    <!-- ==================== HOME PAGE - ALL SALON INFO ==================== -->
+    <!-- HOME PAGE -->
     <div id="homePage" class="app-page active-page">
       <div class="hero-app">
-        <h2>Elegance Meets Artistry</h2>
-        <p>Hair • Nails • Bridal • Spa Treatments</p>
-        <button class="btn-large" id="exploreServicesBtn">✨ Explore All Services →</button>
+        <h2>Future of Tech, Today</h2>
+        <p>Smartphones • Laptops • Audio • Home Appliances</p>
+        <button class="btn-large" id="exploreShopBtn">✨ Shop Now →</button>
       </div>
 
-      <!-- Service Categories (quick navigation) -->
       <div class="section-card">
-        <div class="section-title">💫 Our Signature Services</div>
-        <div class="grid-services">
-          <div class="service-card" data-category="hair">
-            <span>💇‍♀️</span>
-            <h4>Hair Styling</h4>
-            <p>Cut, color, braids, weaves</p>
-            <span class="price">from 1,500 KES</span>
-          </div>
-          <div class="service-card" data-category="nails">
-            <span>💅</span>
-            <h4>Nail Art</h4>
-            <p>Gel, acrylic, manicure</p>
-            <span class="price">from 1,200 KES</span>
-          </div>
-          <div class="service-card" data-category="bridal">
-            <span>👰</span>
-            <h4>Bridal Package</h4>
-            <p>Full styling + makeup</p>
-            <span class="price">from 12,000 KES</span>
-          </div>
-          <div class="service-card" data-category="spa">
-            <span>🧖‍♀️</span>
-            <h4>Spa & Massage</h4>
-            <p>Relaxation, facials</p>
-            <span class="price">from 3,500 KES</span>
-          </div>
+        <div class="section-title">📱 Shop by Category</div>
+        <div class="category-grid">
+          <div class="category-card" data-cat="phone"><span>📱</span><h4>Phones</h4></div>
+          <div class="category-card" data-cat="laptop"><span>💻</span><h4>Laptops</h4></div>
+          <div class="category-card" data-cat="audio"><span>🎧</span><h4>Audio</h4></div>
+          <div class="category-card" data-cat="appliance"><span>🔌</span><h4>Appliances</h4></div>
         </div>
-        <p style="font-size: 0.8rem; margin-top: 20px; text-align: center; color: #bcb09b;">👉 Tap any category to see detailed services</p>
+        <p style="font-size:0.8rem; margin-top:18px; text-align:center;">👉 Tap any category to see products</p>
       </div>
 
-      <!-- About Salon + Why Us -->
       <div class="section-card">
-        <div class="section-title">🔥 The Burjeon's Experience</div>
-        <p style="margin-bottom: 20px;">Burjeon's Salon & Spa is Nairobi's premier destination for luxury grooming and wellness. Our expert stylists use premium products to bring your vision to life — whether it's a bold new haircut, bridal glam, or a rejuvenating facial. Walk out feeling radiant.</p>
+        <div class="section-title">🔥 Why DemoElectronics?</div>
         <div class="feature-list">
-          <div class="feature-item">⭐ 5-Star Stylists</div>
-          <div class="feature-item">✨ Organic Products</div>
-          <div class="feature-item">📅 Flexible Booking</div>
+          <div class="feature-item">✅ 1-Year Warranty</div>
+          <div class="feature-item">🚚 Free Delivery Nairobi</div>
+          <div class="feature-item">💳 Pay on Delivery</div>
         </div>
       </div>
 
-      <!-- Quick Booking Section -->
       <div class="form-card">
-        <h3 style="color:#e6b422; margin-bottom: 12px;">📅 Quick Appointment</h3>
-        <form id="homeBookingForm">
-          <input type="text" id="homeName" placeholder="Your name" required>
-          <input type="tel" id="homePhone" placeholder="Phone number (WhatsApp)" required>
-          <select id="homeService">
-            <option value="">Select a service</option>
-            <option>Haircut & Styling</option>
-            <option>Manicure/Pedicure</option>
-            <option>Bridal Package</option>
-            <option>Deep Tissue Massage</option>
-            <option>Facial Treatment</option>
-          </select>
-          <textarea id="homeDetails" rows="2" placeholder="Preferred date & time or special requests..."></textarea>
-          <button type="submit">📞 Book via WhatsApp</button>
+        <h3 style="color:#e6b422;">📞 Quick Inquiry</h3>
+        <form id="homeInquiryForm">
+          <input type="text" id="inquiryName" placeholder="Your name" required>
+          <input type="tel" id="inquiryPhone" placeholder="Phone number" required>
+          <textarea id="inquiryMsg" rows="2" placeholder="Which product are you interested in?"></textarea>
+          <button type="submit">Send via WhatsApp</button>
         </form>
-        <div class="order-note-sm" style="margin-top:12px;">We confirm within 15 minutes | Prices in KES</div>
       </div>
-      <footer>© 2026 Burjeon's Salon & Spa — Where beauty meets gold | Nairobi</footer>
+      <footer>© 2026 DemoElectronics — Best prices in KES | Same-day dispatch</footer>
     </div>
 
-    <!-- ==================== SERVICES PAGE (Full catalog) ==================== -->
-    <div id="servicesPage" class="app-page">
-      <div style="padding: 20px 0 10px 0;">
-        <h2 style="color:#e6b422; text-align:center; margin: 12px 0 8px;">💆‍♀️ Complete Service Menu</h2>
-        <p style="text-align:center; margin-bottom: 20px; color:#bcb09b;">Hair · Nails · Bridal · Spa · Makeup</p>
+    <!-- PRODUCTS PAGE -->
+    <div id="productsPage" class="app-page">
+      <div style="padding: 20px 0 10px;">
+        <h2 style="color:#e6b422; text-align:center;">🛍️ All Electronics</h2>
+        <p style="text-align:center; margin-bottom:20px; color:#bcb09b;">Genuine products | Best deals</p>
       </div>
-      <div id="servicesCatalog" class="service-grid">
-        <!-- dynamic services injected via JS -->
-      </div>
-      
-      <!-- Booking form on services page -->
-      <div class="form-card" style="margin-top: 20px;">
-        <h3 style="color:#e6b422;">📋 Request an Appointment</h3>
-        <form id="serviceBookingForm">
-          <input type="text" id="serviceName" placeholder="Full name" required>
-          <input type="tel" id="servicePhone" placeholder="WhatsApp number" required>
-          <input type="text" id="servicePreference" placeholder="Which service? (e.g., Silk press, Gel nails, Bridal)">
-          <textarea id="serviceDetails" rows="2" placeholder="Preferred date/time, extra notes..."></textarea>
-          <button type="submit">💇 Book via WhatsApp</button>
+      <div id="productCatalog" class="product-grid"></div>
+      <div class="form-card" style="margin-top:20px;">
+        <h3 style="color:#e6b422;">📦 Bulk / Custom Order</h3>
+        <form id="productInquiryForm">
+          <input type="text" id="orderName" placeholder="Full name" required>
+          <input type="tel" id="orderPhone" placeholder="WhatsApp number" required>
+          <textarea id="orderMsg" rows="2" placeholder="Product names & quantities..."></textarea>
+          <button type="submit">📞 Order via WhatsApp</button>
         </form>
       </div>
-      <footer>Tap any service below to pre-fill booking request ✨</footer>
+      <footer>Tap "Add to Cart" on any product → then checkout via WhatsApp</footer>
+    </div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div class="overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button class="close-cart" id="closeCartBtn">✕</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+      <p style="text-align:center; color:#888;">Cart is empty</p>
+    </div>
+    <div class="cart-total">
+      <div style="font-size:1.2rem;">Total: <span id="cartTotalAmount">0 KES</span></div>
+      <button class="checkout-btn" id="checkoutBtn">📱 Checkout via WhatsApp</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ---------- SALON SERVICES DATABASE (HAIR, NAILS, BRIDAL, SPA, MAKEUP) ----------
-  const salonServices = [
-    { id: 1, name: "Luxury Haircut & Blowout", category: "hair", desc: "Precision cut + signature blowout.", price: "2,500 KES", img: "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=500&q=80", badge: "Hair" },
-    { id: 2, name: "Keratin Smoothing", category: "hair", desc: "Frizz-free, silky straight treatment.", price: "6,500 KES", img: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=500&q=80", badge: "Hair Treatment" },
-    { id: 3, name: "Box Braids Installation", category: "hair", desc: "Medium length, any color options.", price: "4,500 KES", img: "https://images.unsplash.com/photo-1611695434401-8af0c1f401c6?w=500&q=80", badge: "Protective Style" },
-    { id: 4, name: "Gel Manicure", category: "nails", desc: "Long-lasting gel polish + cuticle care.", price: "1,800 KES", img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&q=80", badge: "Nails" },
-    { id: 5, name: "Acrylic Full Set", category: "nails", desc: "Custom shape & French or color.", price: "2,800 KES", img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&q=80", badge: "Nail Art" },
-    { id: 6, name: "Luxury Pedicure", category: "nails", desc: "Foot soak, scrub, massage + polish.", price: "2,200 KES", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80", badge: "Pedicure" },
-    { id: 7, name: "Bridal Full Package", category: "bridal", desc: "Hair, makeup, nails, and trial session.", price: "15,000 KES", img: "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80", badge: "Bridal" },
-    { id: 8, name: "Bridal Hair & Makeup", category: "bridal", desc: "Professional styling for brides & bridesmaids.", price: "8,500 KES", img: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=500&q=80", badge: "Wedding" },
-    { id: 9, name: "Deep Tissue Massage", category: "spa", desc: "60 min, relieves muscle tension.", price: "4,000 KES", img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&q=80", badge: "Spa" },
-    { id: 10, name: "Hydrating Facial", category: "spa", desc: "Deep cleanse, mask & massage.", price: "3,500 KES", img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=80", badge: "Facial" },
-    { id: 11, name: "Hot Stone Massage", category: "spa", desc: "Ultimate relaxation with basalt stones.", price: "5,500 KES", img: "https://images.unsplash.com/photo-1600334089648-0a2b4c823042?w=500&q=80", badge: "Spa" },
-    { id: 12, name: "Men's Grooming", category: "hair", desc: "Haircut, beard trim & hot towel.", price: "2,000 KES", img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80", badge: "Barber" },
-    { id: 13, name: "Eyelash Extensions", category: "makeup", desc: "Classic set, natural volume.", price: "4,200 KES", img: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500&q=80", badge: "Lashes" },
-    { id: 14, name: "Airbrush Makeup", category: "makeup", desc: "Flawless finish for events/photos.", price: "5,000 KES", img: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500&q=80", badge: "Makeup" },
-    { id: 15, name: "Kids Haircut", category: "hair", desc: "Gentle styling for children under 12.", price: "1,200 KES", img: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=500&q=80", badge: "Kids" }
+  // PRODUCT DATABASE (Electronics)
+  const products = [
+    { id: 1, name: "iPhone 15 Pro", category: "phone", price: 185000, desc: "A17 Bionic, 48MP camera, Titanium", img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80", badge: "Flagship" },
+    { id: 2, name: "Samsung Galaxy S24 Ultra", category: "phone", price: 172000, desc: "200MP camera, S Pen, AI features", img: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=500&q=80", badge: "Android" },
+    { id: 3, name: "MacBook Air M3", category: "laptop", price: 155000, desc: "13-inch, 8GB RAM, 256GB SSD", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80", badge: "Apple" },
+    { id: 4, name: "Dell XPS 15", category: "laptop", price: 210000, desc: "Intel i7, 32GB RAM, 1TB SSD", img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500&q=80", badge: "Business" },
+    { id: 5, name: "Sony WH-1000XM5", category: "audio", price: 45000, desc: "Noise cancelling, 30hr battery", img: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80", badge: "Headphones" },
+    { id: 6, name: "AirPods Pro 2", category: "audio", price: 38000, desc: "Active noise cancellation, spatial audio", img: "https://images.unsplash.com/photo-1600294037681-c80b4c74e869?w=500&q=80", badge: "Earbuds" },
+    { id: 7, name: "Samsung 55\" 4K TV", category: "appliance", price: 95000, desc: "Crystal UHD, Smart Hub", img: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=500&q=80", badge: "TV" },
+    { id: 8, name: "Instant Pot Duo", category: "appliance", price: 12500, desc: "7-in-1 pressure cooker", img: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=500&q=80", badge: "Kitchen" },
+    { id: 9, name: "Xiaomi Robot Vacuum", category: "appliance", price: 42000, desc: "Smart mapping, 2-in-1 mop", img: "https://images.unsplash.com/photo-1584824486509-2e8f8de25a8f?w=500&q=80", badge: "Smart Home" },
+    { id: 10, name: "iPad Pro 11\"", category: "laptop", price: 125000, desc: "M2 chip, 128GB, WiFi", img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&q=80", badge: "Tablet" }
   ];
 
-  // render services grid (full catalog)
-  function renderServices(filterCategory = null) {
-    const container = document.getElementById('servicesCatalog');
-    if (!container) return;
-    let filtered = salonServices;
-    if (filterCategory && filterCategory !== 'all') {
-      filtered = salonServices.filter(s => s.category === filterCategory);
-    }
-    if (filtered.length === 0) {
-      container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">✨ No services in this category. Explore others ✨</div>`;
+  let cart = [];
+  
+  function updateCartUI() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsDiv = document.getElementById('cartItemsList');
+    const cartTotalSpan = document.getElementById('cartTotalAmount');
+    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    cartTotalSpan.innerText = total.toLocaleString() + " KES";
+    cartCount.innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+    
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = '<p style="text-align:center; color:#888;">Cart is empty</p>';
       return;
     }
-    container.innerHTML = filtered.map(service => `
-      <div class="service-product-card" data-service='${JSON.stringify(service)}'>
-        <img src="${service.img}" alt="${service.name}" loading="lazy">
-        <div class="service-info">
-          <h3>${service.name}</h3>
-          <div class="badge">${service.badge}</div>
-          <p style="color:#bcb09b; font-size:0.85rem; margin:6px 0;">${service.desc}</p>
-          <div class="price-gold">${service.price}</div>
-          <button class="book-btn quick-book" data-sname="${service.name}">💇 Book Now → WhatsApp</button>
+    cartItemsDiv.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.name}</div>
+          <div class="cart-item-price">${(item.price * item.qty).toLocaleString()} KES</div>
+        </div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" data-id="${item.id}" data-delta="-1">-</button>
+          <span>${item.qty}</span>
+          <button class="qty-btn" data-id="${item.id}" data-delta="1">+</button>
+          <button class="remove-item" data-id="${item.id}">🗑️</button>
         </div>
       </div>
     `).join('');
-
-    // attach quick book events
-    document.querySelectorAll('.quick-book').forEach(btn => {
+    
+    document.querySelectorAll('.qty-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const serviceName = btn.getAttribute('data-sname');
-        const servicePrefField = document.getElementById('servicePreference');
-        if (servicePrefField) {
-          servicePrefField.value = `${serviceName} appointment`;
-          document.getElementById('serviceName')?.focus();
-          alert(`✨ "${serviceName}" selected! Fill your details and send booking request.`);
-        } else {
-          bookServiceDirect(serviceName);
+        const id = parseInt(btn.dataset.id);
+        const delta = parseInt(btn.dataset.delta);
+        const idx = cart.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          cart[idx].qty += delta;
+          if (cart[idx].qty <= 0) cart.splice(idx, 1);
+          updateCartUI();
+          saveCart();
         }
       });
     });
+    document.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.dataset.id);
+        cart = cart.filter(i => i.id !== id);
+        updateCartUI();
+        saveCart();
+      });
+    });
   }
-
-  function bookServiceDirect(service) {
-    const bakeryNumber = "254700000000";
-    const msg = `💇 *BURJEON'S SALON* - Service Inquiry\nI'm interested in: ${service}. Please assist with booking.`;
-    window.open(`https://wa.me/${bakeryNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-  }
-
-  // switch between home and services
-  function switchToPage(pageId) {
-    const homePage = document.getElementById('homePage');
-    const servicesPage = document.getElementById('servicesPage');
-    const homeBtn = document.getElementById('homeNavBtn');
-    const servBtn = document.getElementById('servicesNavBtn');
-    
-    if (pageId === 'home') {
-      homePage.classList.add('active-page');
-      servicesPage.classList.remove('active-page');
-      homeBtn.classList.add('active');
-      servBtn.classList.remove('active');
-      document.querySelector('.pages-area').scrollTop = 0;
+  
+  function addToCart(product) {
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty++;
     } else {
-      homePage.classList.remove('active-page');
-      servicesPage.classList.add('active-page');
-      servBtn.classList.add('active');
-      homeBtn.classList.remove('active');
-      renderServices(null);
-      document.querySelector('.pages-area').scrollTop = 0;
+      cart.push({ ...product, qty: 1 });
     }
+    updateCartUI();
+    saveCart();
+    alert(`${product.name} added to cart!`);
   }
-
-  // WhatsApp booking sender
-  function sendWhatsAppBooking(name, phone, service, details, event) {
+  
+  function saveCart() { localStorage.setItem('demoElectronicsCart', JSON.stringify(cart)); }
+  function loadCart() {
+    const saved = localStorage.getItem('demoElectronicsCart');
+    if (saved) { cart = JSON.parse(saved); updateCartUI(); }
+  }
+  
+  // Render products
+  function renderProducts(filterCat = null) {
+    const container = document.getElementById('productCatalog');
+    let filtered = products;
+    if (filterCat && filterCat !== 'all') filtered = products.filter(p => p.category === filterCat);
+    if (filtered.length === 0) { container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">No products in this category</div>'; return; }
+    container.innerHTML = filtered.map(p => `
+      <div class="product-card">
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <div class="badge">${p.badge}</div>
+          <p style="color:#bcb09b; font-size:0.85rem;">${p.desc}</p>
+          <div class="price">${p.price.toLocaleString()} KES</div>
+          <button class="add-to-cart" data-id="${p.id}">🛒 Add to Cart</button>
+        </div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const pid = parseInt(btn.dataset.id);
+        const prod = products.find(p => p.id === pid);
+        if (prod) addToCart(prod);
+      });
+    });
+  }
+  
+  // WhatsApp send function
+  function sendWhatsAppMessage(name, phone, message, event) {
     if (event) event.preventDefault();
-    if (!name || !phone) {
-      alert("❌ Please enter your name and phone number.");
-      return false;
-    }
-    const cleaned = phone.replace(/[\s\-+()]/g, '');
-    if (cleaned.length < 6) {
-      alert("📞 Please enter a valid phone number.");
-      return false;
-    }
-    const salonNumber = "254700000000"; // Replace with actual Burjeon's Salon WhatsApp
-    const msg = `💇‍♀️ *BURJEON'S SALON APPOINTMENT* 💅\n\n👤 Client: ${name}\n📞 Contact: ${phone}\n💎 Service: ${service || "Not specified"}\n📝 Details: ${details || "No extra notes"}\n\nPlease confirm availability. Thank you! ✨`;
-    const url = `https://wa.me/${salonNumber}?text=${encodeURIComponent(msg)}`;
-    const confirmSend = confirm(`📱 Send booking request to Burjeon's Salon via WhatsApp?`);
-    if (confirmSend) {
-      window.open(url, '_blank');
-      alert("✅ Appointment request sent! We'll reply within 15 minutes.");
-      return true;
-    }
+    if (!name || !phone) { alert("❌ Please enter name and phone number"); return false; }
+    const cleanPhone = phone.replace(/[\s\-+()]/g, '');
+    if (cleanPhone.length < 6) { alert("📞 Valid phone number required"); return false; }
+    const businessNum = "254700000000";
+    const fullMsg = `🛒 *DEMOELECTRONICS ORDER* 🛒\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📦 Details: ${message}\n\nThank you for shopping with DemoElectronics!`;
+    const url = `https://wa.me/${businessNum}?text=${encodeURIComponent(fullMsg)}`;
+    if (confirm("Send order via WhatsApp?")) { window.open(url, '_blank'); alert("✅ Request sent!"); return true; }
     return false;
   }
-
-  // Home form
-  document.getElementById('homeBookingForm')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('homeName').value.trim();
-    const phone = document.getElementById('homePhone').value.trim();
-    const service = document.getElementById('homeService').value || "Not selected";
-    const details = document.getElementById('homeDetails').value.trim() || "Salon booking from home";
-    sendWhatsAppBooking(name, phone, service, details, e);
-  });
-
-  // Services page form
-  document.getElementById('serviceBookingForm')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('serviceName').value.trim();
-    const phone = document.getElementById('servicePhone').value.trim();
-    const preference = document.getElementById('servicePreference').value.trim() || "Salon service";
-    const details = document.getElementById('serviceDetails').value.trim() || "Request appointment";
-    sendWhatsAppBooking(name, phone, preference, details, e);
-  });
-
-  // Navigation
-  document.getElementById('homeNavBtn')?.addEventListener('click', () => switchToPage('home'));
-  document.getElementById('servicesNavBtn')?.addEventListener('click', () => switchToPage('services'));
-  document.getElementById('exploreServicesBtn')?.addEventListener('click', () => switchToPage('services'));
-
-  // Category filter from home page -> go to services & filter
-  const categoryMap = { hair: "hair", nails: "nails", bridal: "bridal", spa: "spa" };
-  document.querySelectorAll('.service-card').forEach(card => {
+  
+  // Checkout with cart
+  function checkoutWithCart() {
+    if (cart.length === 0) { alert("Cart is empty. Add items first!"); return; }
+    const itemsList = cart.map(i => `${i.name} x${i.qty} = ${(i.price * i.qty).toLocaleString()} KES`).join('\n');
+    const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+    const msg = `🛒 My Cart:\n${itemsList}\n\nTOTAL: ${total.toLocaleString()} KES\n\nPlease confirm availability and delivery.`;
+    const name = prompt("Enter your name for order:", "Customer");
+    const phone = prompt("Enter your WhatsApp number:", "07XXXXXXXX");
+    if (name && phone) sendWhatsAppMessage(name, phone, msg, null);
+  }
+  
+  // Page switching
+  function switchPage(page) {
+    const home = document.getElementById('homePage');
+    const productsPage = document.getElementById('productsPage');
+    const homeBtn = document.getElementById('homeNavBtn');
+    const prodBtn = document.getElementById('productsNavBtn');
+    if (page === 'home') {
+      home.classList.add('active-page');
+      productsPage.classList.remove('active-page');
+      homeBtn.classList.add('active');
+      prodBtn.classList.remove('active');
+    } else {
+      home.classList.remove('active-page');
+      productsPage.classList.add('active-page');
+      prodBtn.classList.add('active');
+      homeBtn.classList.remove('active');
+      renderProducts(null);
+    }
+    document.querySelector('.pages-area').scrollTop = 0;
+  }
+  
+  // Cart sidebar
+  const cartSidebar = document.getElementById('cartSidebar');
+  const cartOverlay = document.getElementById('cartOverlay');
+  document.getElementById('cartIcon').addEventListener('click', () => { cartSidebar.classList.add('open'); cartOverlay.classList.add('show'); });
+  document.getElementById('closeCartBtn').addEventListener('click', () => { cartSidebar.classList.remove('open'); cartOverlay.classList.remove('show'); });
+  cartOverlay.addEventListener('click', () => { cartSidebar.classList.remove('open'); cartOverlay.classList.remove('show'); });
+  document.getElementById('checkoutBtn').addEventListener('click', () => { checkoutWithCart(); });
+  
+  // Event Listeners
+  document.getElementById('homeNavBtn').addEventListener('click', () => switchPage('home'));
+  document.getElementById('productsNavBtn').addEventListener('click', () => switchPage('products'));
+  document.getElementById('exploreShopBtn').addEventListener('click', () => switchPage('products'));
+  document.querySelectorAll('.category-card').forEach(card => {
     card.addEventListener('click', () => {
-      const cat = card.getAttribute('data-category');
-      if (cat && categoryMap[cat]) {
-        switchToPage('services');
-        setTimeout(() => {
-          renderServices(cat);
-          document.querySelector('.pages-area').scrollTop = 0;
-        }, 50);
-      }
+      const cat = card.dataset.cat;
+      switchPage('products');
+      setTimeout(() => renderProducts(cat), 50);
     });
   });
-
-  // initial render
-  renderServices(null);
-  document.getElementById('homeNavBtn')?.classList.add('active');
-  window.addEventListener('load', () => {
-    document.querySelector('.pages-area').scrollTop = 0;
+  document.getElementById('homeInquiryForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('inquiryName').value;
+    const phone = document.getElementById('inquiryPhone').value;
+    const msg = document.getElementById('inquiryMsg').value || "General inquiry";
+    sendWhatsAppMessage(name, phone, msg, e);
   });
+  document.getElementById('productInquiryForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('orderName').value;
+    const phone = document.getElementById('orderPhone').value;
+    const msg = document.getElementById('orderMsg').value || "Product inquiry from shop";
+    sendWhatsAppMessage(name, phone, msg, e);
+  });
+  
+  loadCart();
+  renderProducts();
+  document.getElementById('homeNavBtn').classList.add('active');
 </script>
 </body>
-</html>
+                                                                                     </html>
